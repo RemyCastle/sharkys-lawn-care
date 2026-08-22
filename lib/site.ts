@@ -5,8 +5,8 @@ export const site = {
   ownerTitle: "Owner",
   town: "Springfield, Oregon",
   townShort: "Springfield, OR",
-  towns: "Eugene/Springfield",
-  serviceArea: "Eugene / Springfield, OR",
+  towns: "Eugene and Springfield area",
+  serviceArea: "Eugene and Springfield area",
   phoneDisplay: "(541) 579-0726",
   phoneTel: "tel:+15415790726",
   email: "sharkyslawncare.541@gmail.com",
@@ -24,7 +24,7 @@ export const site = {
   instagramHandle: "@sharkyslawnmowingservice",
   heroTitle: "Springfield lawns. We cut them.",
   heroLead:
-    "Mow, edge, trim, blow. Mulch, blackberries, thatch, cleanup, pressure wash. Eugene and Springfield, and around here.",
+    "Mow, edge, trim, blow. Mulch, blackberries, thatch, cleanup, pressure wash. Eugene and Springfield area.",
   ctaPrimary: "Call (541) 579-0726",
   ctaSecondary: "Email us",
   about:

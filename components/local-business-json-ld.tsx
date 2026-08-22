@@ -21,7 +21,6 @@ export function LocalBusinessJsonLd() {
     areaServed: [
       { "@type": "City", name: "Eugene" },
       { "@type": "City", name: "Springfield" },
-      "surrounding",
     ],
     sameAs: [site.facebook, site.instagram],
     hasOfferCatalog: {
