@@ -116,8 +116,33 @@
   border-left: 10px solid #3f8c10;
 }
 
-.shark-bite {
-  clip-path: url(#shark-bite);
+.work-stream {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1rem;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.35rem;
+}
+
+.work-slide {
+  flex: 0 0 min(88%, 36rem);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.work-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 3px solid #0b0f0c;
+  background: #ffffff;
+  padding: 0;
+}
+
+.work-dot[aria-current="true"] {
+  background: #3f8c10;
 }
 
 .stripe {

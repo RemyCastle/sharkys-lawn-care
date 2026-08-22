@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-import { WorkGrid } from "@/components/work-grid"
+import { WorkStream } from "@/components/work-stream"
 import { marks, services, site } from "@/lib/site"
 
 export default function HomePage() {
@@ -8,18 +8,7 @@ export default function HomePage() {
     <div className="bg-ground">
       <section className="border-b-4 border-ink bg-ground">
         <div className="mx-auto max-w-5xl px-4 py-8">
-          <div className="vinyl mx-auto w-full max-w-md overflow-hidden">
-            <Image
-              src={marks.card}
-              alt="Sharky's Lawn Care printed card: hoodie shark on a walk-behind mower, Jonathan Lopez, Eugene/Springfield"
-              width={1200}
-              height={1600}
-              className="h-auto w-full object-contain"
-              unoptimized
-              priority
-            />
-          </div>
-          <div className="mt-8 flex flex-col gap-4">
+          <div className="flex flex-col gap-4">
             <h1 className="text-5xl text-ink sm:text-6xl md:text-7xl">
               {site.heroTitle}
             </h1>
@@ -60,7 +49,7 @@ export default function HomePage() {
       <section className="border-b-4 border-ink bg-ground">
         <div className="mx-auto max-w-5xl px-4 py-12">
           <h2 className="text-5xl">Work</h2>
-          <WorkGrid />
+          <WorkStream />
         </div>
       </section>
 

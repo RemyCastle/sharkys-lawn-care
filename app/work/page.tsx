@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { WorkGrid } from "@/components/work-grid"
+import { WorkStream } from "@/components/work-stream"
 import { site } from "@/lib/site"
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ export default function WorkPage() {
     <div className="bg-ground">
       <div className="mx-auto max-w-5xl px-4 py-12">
         <h1 className="text-6xl">Work</h1>
-        <WorkGrid priority />
+        <WorkStream />
         <a href={site.phoneTel} className="cta cta-call mt-10">
           {site.ctaPrimary}
         </a>
