@@ -10,7 +10,9 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-5xl flex-col gap-5 px-4 py-10">
         <BrandMark className="h-20" />
         <p className="max-w-2xl text-base font-semibold leading-relaxed">
-          {site.address}
+          {site.owner}
+          <br />
+          {site.towns}
           <br />
           <a href={site.phoneTel} className="underline decoration-hot underline-offset-4">
             {site.phoneDisplay}

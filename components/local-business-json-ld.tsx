@@ -14,10 +14,8 @@ export function LocalBusinessJsonLd() {
     url: site.siteUrl,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "5172 A St",
       addressLocality: "Springfield",
       addressRegion: "OR",
-      postalCode: "97478",
       addressCountry: "US",
     },
     areaServed: [
