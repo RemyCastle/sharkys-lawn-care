@@ -14,10 +14,7 @@ export default function ServicesPage() {
         <h1 className="text-6xl">Services</h1>
         <ul className="mt-8 max-w-xl list-disc space-y-2 pl-5 text-xl font-medium">
           {services.map((service) => (
-            <li key={service.slug}>
-              {service.name}
-              {service.card ? ` (${service.card})` : null}
-            </li>
+            <li key={service.slug}>{service.name}</li>
           ))}
         </ul>
         <a href={site.phoneTel} className="cta cta-call mt-10">

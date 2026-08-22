@@ -40,10 +40,7 @@ export default function HomePage() {
           <h2 className="text-5xl">Services</h2>
           <ul className="mt-8 max-w-xl list-disc space-y-2 pl-5 text-xl font-medium">
             {services.map((service) => (
-              <li key={service.slug}>
-                {service.name}
-                {service.card ? ` (${service.card})` : null}
-              </li>
+              <li key={service.slug}>{service.name}</li>
             ))}
           </ul>
         </div>

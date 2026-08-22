@@ -42,7 +42,7 @@ export const jobPhotos = [
   {
     src: "/work/pressure-wash-siding.jpg",
     alt: "Pressure-wash job: house siding, part washed, part still oxidized",
-    caption: "Pressure wash",
+    caption: "Pressure Wash",
     width: 720,
     height: 540,
   },
@@ -51,32 +51,26 @@ export const jobPhotos = [
 export const services = [
   {
     slug: "general-maintenance",
-    name: "General maintenance",
-    card: "edging, blowing, trimming, mowing",
+    name: "General Maintenance (Edging, Blowing, Trimming, Mowing)",
   },
   {
     slug: "mulch-installation",
-    name: "Mulch installation",
-    card: "",
+    name: "Mulch Installation",
   },
   {
     slug: "blackberry-removal",
-    name: "Blackberry removal",
-    card: "",
+    name: "Blackberry Removal",
   },
   {
     slug: "thatch-aerate",
-    name: "Thatch and aerate",
-    card: "",
+    name: "Thatch and Aerate",
   },
   {
     slug: "seasonal-cleanups",
-    name: "Seasonal clean-ups and debris removal",
-    card: "",
+    name: "Seasonal Clean-Ups and Debris Removal",
   },
   {
     slug: "pressure-wash",
-    name: "Pressure wash",
-    card: "",
+    name: "Pressure Wash",
   },
 ] as const
