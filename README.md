@@ -48,4 +48,10 @@ No street address. No Google URL. The quote form opens a mailto.
 
 ## Look
 
-Sport card. Hard midday sun. Four colors only: ground `#F4F5F3`, ink `#0B0F0C`, hot `#3F8C10`, steel `#36414C`. Type: Teko + Barlow. Mark is an original SVG in `public/mark.svg`.
+Sport card. Hard midday sun. Four colors only: ground `#F4F5F3`, ink `#0B0F0C`, hot `#3F8C10`, steel `#36414C`. Type: Teko + Barlow.
+
+Art is Jonathan’s only:
+
+- `public/logo-profile.jpg` — Facebook profile mark (polo shark, walk-behind). Header.
+- `public/cover-polo.jpg` — Facebook cover (same polo shark). Hero banner.
+- Printed card photo (hoodie shark) goes in as `public/card.jpg` when that file is on disk. Do not redraw the shark.

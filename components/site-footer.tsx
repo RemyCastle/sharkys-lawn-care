@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 
 import { site } from "@/lib/site"
@@ -7,9 +8,14 @@ export function SiteFooter() {
     <footer className="border-t-4 border-ink bg-ink text-ground">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-3">
         <div className="flex flex-col gap-2">
-          <p className="font-display text-4xl uppercase leading-none">
-            Sharky&apos;s Lawn Care
-          </p>
+          <Image
+            src="/logo-profile.jpg"
+            alt="Sharky's Lawn Care"
+            width={160}
+            height={160}
+            className="size-28 bg-white object-contain"
+            unoptimized
+          />
           <p className="text-sm font-semibold">{site.legalName}</p>
           <p className="text-sm">
             {site.town}

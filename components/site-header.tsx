@@ -16,23 +16,19 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b-4 border-ink bg-ground">
       <div className="jersey-band h-2" />
-      <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between gap-3 px-4">
-        <Link href="/" className="flex min-w-0 items-center gap-2">
+      <div className="mx-auto flex h-[4.75rem] max-w-6xl items-center justify-between gap-3 px-4">
+        <Link href="/" className="flex min-w-0 items-center gap-3">
           <Image
-            src="/mark.svg"
-            alt=""
-            width={56}
-            height={45}
-            className="h-11 w-14 shrink-0 object-contain"
+            src="/logo-profile.jpg"
+            alt="Sharky's Lawn Care"
+            width={72}
+            height={72}
+            className="size-14 shrink-0 object-contain"
             unoptimized
+            priority
           />
-          <span className="min-w-0">
-            <span className="block font-display text-[2rem] leading-none uppercase">
-              Sharky&apos;s
-            </span>
-            <span className="block truncate text-[11px] font-extrabold uppercase tracking-[0.16em] text-steel">
-              {site.domain}
-            </span>
+          <span className="min-w-0 truncate text-[11px] font-extrabold uppercase tracking-[0.16em] text-steel">
+            {site.domain}
           </span>
         </Link>
         <nav className="hidden items-center gap-5 text-sm font-extrabold uppercase tracking-wider md:flex">

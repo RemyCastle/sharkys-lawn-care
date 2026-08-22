@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { Mail, Phone } from "lucide-react"
 
@@ -13,15 +14,23 @@ export default function HomePage() {
   return (
     <div>
       <section className="sun-field border-b-4 border-ink">
+        <div className="border-b-4 border-ink bg-white">
+          <div className="mx-auto max-w-6xl">
+            <Image
+              src="/cover-polo.jpg"
+              alt="Sharky's Lawn Care Facebook cover: polo shark, walk-behind mower, and the service list"
+              width={960}
+              height={400}
+              className="w-full object-cover"
+              unoptimized
+              priority
+            />
+          </div>
+        </div>
         <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-10 md:grid-cols-[1.1fr_0.9fr] md:py-14">
           <div className="flex flex-col gap-5">
-            <p className="text-sm font-extrabold uppercase tracking-[0.22em] text-steel">
+            <h1 className="text-5xl text-ink sm:text-6xl md:text-7xl">
               {site.town}
-            </p>
-            <h1 className="text-6xl text-ink sm:text-7xl md:text-8xl">
-              Sharky&apos;s
-              <br />
-              Lawn Care
             </h1>
             <p className="max-w-md text-xl font-medium text-ink">
               {site.serviceArea}. Free estimates. Call Jonathan Lopez if the

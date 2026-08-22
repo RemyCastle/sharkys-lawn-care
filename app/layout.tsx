@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   description: `${site.name} in ${site.town}. ${site.tagline}. Free estimates. ${site.serviceArea}. Call ${site.phoneDisplay}.`,
   applicationName: site.name,
   icons: {
-    icon: "/mark.svg",
+    icon: "/logo-profile.jpg",
   },
   openGraph: {
     title: `${site.name} · ${site.townShort}`,

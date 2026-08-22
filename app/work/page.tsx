@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 
 import { SectionHead } from "@/components/section-head"
 import { buttonVariants } from "@/components/ui/button"
@@ -48,6 +49,16 @@ export default function WorkPage() {
               </div>
             </article>
           ))}
+        </div>
+        <div className="sport-card overflow-hidden">
+          <Image
+            src="/cover-polo.jpg"
+            alt="Facebook cover: polo shark and the service list"
+            width={960}
+            height={400}
+            className="w-full object-cover"
+            unoptimized
+          />
         </div>
         <div className="sport-card-steel p-6">
           <p className="font-display text-4xl uppercase">The public hubs</p>
