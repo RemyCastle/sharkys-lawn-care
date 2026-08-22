@@ -24,7 +24,7 @@ export const site = {
   instagramHandle: "@sharkyslawnmowingservice",
   heroTitle: "Springfield lawns. We cut them.",
   heroLead:
-    "Mow, edge, trim, blow. Then the jobs that wait: mulch, blackberries, thatch, cleanup, pressure wash. Eugene and Springfield, and around here.",
+    "Mow, edge, trim, blow. Mulch, blackberries, thatch, cleanup, pressure wash. Eugene and Springfield, and around here.",
   ctaPrimary: "Call (541) 579-0726",
   ctaSecondary: "Email us",
   about:
