@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react"
 
 import { BrandMark } from "@/components/brand-mark"
+import { pairIsComplete, type LivePair } from "@/lib/pairs"
 import type { LivePhoto, LiveService, LiveSite } from "@/lib/public"
 
 type Tab = "site" | "requests" | "photos" | "users"
@@ -363,6 +364,198 @@ function RequestsTab({ onNote }: { onNote: (n: string) => void }) {
   )
 }
 
+function PairsBlock({ onNote }: { onNote: (n: string) => void }) {
+  const [pairs, setPairs] = useState<LivePair[]>([])
+  const load = useCallback(() => {
+    api<{ pairs: LivePair[] }>("/api/admin/pairs")
+      .then((data) => setPairs(data.pairs || []))
+      .catch((err) => onNote(err.message))
+  }, [onNote])
+  useEffect(() => {
+    load()
+  }, [load])
+  async function saveOrder(next: LivePair[]) {
+    setPairs(next)
+    await api("/api/admin/pairs", {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ order: next.map((pair) => pair.id) }),
+    })
+  }
+  return (
+    <div className="flex flex-col gap-4">
+      <div>
+        <h2 className="text-4xl">Before and After</h2>
+        <p className="mt-2 font-semibold">
+          Optional. Public Work only shows a pair when both photos are in and Show on Work is on.
+          Zero pairs is fine. Use a real before and a real after of the same job. Do not reuse one
+          photo as both sides.
+        </p>
+      </div>
+      <form
+        className="vinyl flex flex-col gap-3 p-4"
+        onSubmit={async (event) => {
+          event.preventDefault()
+          const form = event.currentTarget
+          const data = new FormData(form)
+          if (!(data.get("before") instanceof File) || !(data.get("after") instanceof File)) {
+            onNote("Need a Before and an After.")
+            return
+          }
+          try {
+            const created = await api<{ visible: number }>("/api/admin/pairs", {
+              method: "POST",
+              body: data,
+            })
+            form.reset()
+            onNote(
+              created.visible
+                ? "Pair is on Work."
+                : "Pair saved. Off Work until you turn Show on Work on.",
+            )
+            load()
+          } catch (err) {
+            onNote(err instanceof Error ? err.message : "Upload failed")
+          }
+        }}
+      >
+        <label className="flex flex-col gap-1 text-sm font-extrabold uppercase">
+          Before
+          <input name="before" type="file" accept="image/*" required className="field-ink py-2" />
+        </label>
+        <label className="flex flex-col gap-1 text-sm font-extrabold uppercase">
+          After
+          <input name="after" type="file" accept="image/*" required className="field-ink py-2" />
+        </label>
+        <input name="caption" className="field-ink" placeholder="Caption, optional" />
+        <label className="flex items-center gap-2 font-extrabold">
+          <input name="visible" type="checkbox" value="1" className="size-5 accent-hot" />
+          Show on Work
+        </label>
+        <button type="submit" className="cta cta-call w-fit" style={{ minHeight: "44px" }}>
+          Add pair
+        </button>
+      </form>
+      {pairs.length === 0 ? (
+        <p className="font-semibold">No pairs yet. Work stays a photo stack.</p>
+      ) : null}
+      {pairs.map((pair, index) => {
+        const complete = pairIsComplete(pair)
+        return (
+          <article key={pair.id} className="vinyl overflow-hidden">
+            <div className="grid grid-cols-2">
+              <div className="border-r-4 border-ink">
+                {pair.before_src ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={pair.before_src} alt="Before" className="h-auto w-full" />
+                ) : (
+                  <p className="p-3 font-extrabold">Missing Before</p>
+                )}
+                <p className="border-t-4 border-ink px-2 py-1 text-sm font-extrabold uppercase">
+                  Before
+                </p>
+              </div>
+              <div>
+                {pair.after_src ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={pair.after_src} alt="After" className="h-auto w-full" />
+                ) : (
+                  <p className="p-3 font-extrabold">Missing After</p>
+                )}
+                <p className="border-t-4 border-ink px-2 py-1 text-sm font-extrabold uppercase">
+                  After
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-2 border-t-4 border-ink p-3">
+              {!complete ? (
+                <p className="font-extrabold">Hidden on Work — this pair is missing a photo.</p>
+              ) : null}
+              <input
+                className="field-ink"
+                value={pair.caption}
+                placeholder="Caption"
+                onChange={(event) => {
+                  const next = [...pairs]
+                  next[index] = { ...pair, caption: event.target.value }
+                  setPairs(next)
+                }}
+                onBlur={async () => {
+                  await api("/api/admin/pairs", {
+                    method: "PATCH",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify({ id: pair.id, caption: pair.caption }),
+                  })
+                }}
+              />
+              <label className="flex items-center gap-2 font-extrabold">
+                <input
+                  type="checkbox"
+                  className="size-5 accent-hot"
+                  checked={Boolean(pair.visible) && complete}
+                  disabled={!complete}
+                  onChange={async (event) => {
+                    const visible = event.target.checked ? 1 : 0
+                    try {
+                      await api("/api/admin/pairs", {
+                        method: "PATCH",
+                        headers: { "content-type": "application/json" },
+                        body: JSON.stringify({ id: pair.id, visible }),
+                      })
+                      const next = [...pairs]
+                      next[index] = { ...pair, visible }
+                      setPairs(next)
+                    } catch (err) {
+                      onNote(err instanceof Error ? err.message : "Could not update")
+                    }
+                  }}
+                />
+                Show on Work
+              </label>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  className="admin-mini"
+                  onClick={() => {
+                    if (index === 0) return
+                    const next = [...pairs]
+                    ;[next[index - 1], next[index]] = [next[index], next[index - 1]]
+                    saveOrder(next).catch((err) => onNote(err.message))
+                  }}
+                >
+                  Up
+                </button>
+                <button
+                  type="button"
+                  className="admin-mini"
+                  onClick={() => {
+                    if (index === pairs.length - 1) return
+                    const next = [...pairs]
+                    ;[next[index + 1], next[index]] = [next[index], next[index + 1]]
+                    saveOrder(next).catch((err) => onNote(err.message))
+                  }}
+                >
+                  Down
+                </button>
+                <button
+                  type="button"
+                  className="admin-mini"
+                  onClick={async () => {
+                    await api(`/api/admin/pairs?id=${pair.id}`, { method: "DELETE" })
+                    load()
+                  }}
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          </article>
+        )
+      })}
+    </div>
+  )
+}
+
 function PhotosTab({ onNote }: { onNote: (n: string) => void }) {
   const [photos, setPhotos] = useState<LivePhoto[]>([])
   const load = useCallback(() => {
@@ -383,6 +576,8 @@ function PhotosTab({ onNote }: { onNote: (n: string) => void }) {
   }
   return (
     <div className="mt-6 flex max-w-xl flex-col gap-4">
+      <PairsBlock onNote={onNote} />
+      <h2 className="mt-4 text-4xl">Work stills</h2>
       <form
         className="vinyl flex flex-col gap-3 p-4"
         onSubmit={async (event) => {

@@ -40,3 +40,5 @@ INSERT INTO photos (src, alt, caption, width, height, sort_order) SELECT '/work/
 INSERT INTO photos (src, alt, caption, width, height, sort_order) SELECT '/work/fb-15-hires.jpg', 'Cleared dirt along a house wall, fence, and metal gate', 'Seasonal Clean-Ups and Debris Removal', 1080, 1080, 7 WHERE NOT EXISTS (SELECT 1 FROM photos WHERE src = '/work/fb-15-hires.jpg');
 INSERT INTO photos (src, alt, caption, width, height, sort_order) SELECT '/work/fb-16-hires.jpg', 'Sunken backyard after a cut, stone wall and wood fence behind it', 'General Maintenance', 1080, 1080, 8 WHERE NOT EXISTS (SELECT 1 FROM photos WHERE src = '/work/fb-16-hires.jpg');
 INSERT INTO photos (src, alt, caption, width, height, sort_order) SELECT '/work/ig-03.jpg', 'Overgrown lawn with tall weeds against a grey fence and a sleeper wall', 'General Maintenance', 640, 640, 9 WHERE NOT EXISTS (SELECT 1 FROM photos WHERE src = '/work/ig-03.jpg');
+
+-- Do not insert pairs. Zero is the default. Never invent a before/after.

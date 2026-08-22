@@ -32,6 +32,8 @@ npx wrangler pages dev ./out
 
 Open `/admin`. First visit: create owner. Then Site / Requests / Photos / Users.
 
+Work stills stay a vertical stack. Before/After is optional: add a pair (two real photos + caption + Show on Work) on the Photos tab. Public Work only renders a pair that is on and complete. Zero pairs is the default. Do not invent a pair.
+
 Remote D1 (after deploy):
 
 ```bash

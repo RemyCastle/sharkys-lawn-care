@@ -1,4 +1,8 @@
+import { fallbackPairs, type LivePair } from "@/lib/pairs"
 import { jobPhotos, services, site } from "@/lib/site"
+
+export type { LivePair }
+export { fallbackPairs }
 
 export type LiveSite = {
   hero_title: string

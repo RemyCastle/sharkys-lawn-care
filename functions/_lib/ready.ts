@@ -51,6 +51,17 @@ CREATE TABLE IF NOT EXISTS leads (
   photo_note TEXT,
   status TEXT NOT NULL DEFAULT 'New'
 );
+CREATE TABLE IF NOT EXISTS pairs (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  before_src TEXT NOT NULL DEFAULT '',
+  before_r2_key TEXT,
+  after_src TEXT NOT NULL DEFAULT '',
+  after_r2_key TEXT,
+  caption TEXT NOT NULL DEFAULT '',
+  visible INTEGER NOT NULL DEFAULT 0,
+  sort_order INTEGER NOT NULL DEFAULT 0,
+  created_at TEXT NOT NULL
+);
 `
 
 const SITE_SEED = {

@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react"
 
+import { fallbackPairs, pairIsPublic, type LivePair } from "@/lib/pairs"
 import {
   fallbackPhotos,
   fallbackServices,
@@ -15,12 +16,14 @@ type Live = {
   site: LiveSite
   services: LiveService[]
   photos: LivePhoto[]
+  pairs: LivePair[]
 }
 
 const LiveContext = createContext<Live>({
   site: fallbackSite,
   services: fallbackServices,
   photos: fallbackPhotos,
+  pairs: fallbackPairs,
 })
 
 export function useLive() {
@@ -32,6 +35,7 @@ export function LivePublicProvider({ children }: { children: React.ReactNode }) 
     site: fallbackSite,
     services: fallbackServices,
     photos: fallbackPhotos,
+    pairs: fallbackPairs,
   })
 
   useEffect(() => {
@@ -39,8 +43,9 @@ export function LivePublicProvider({ children }: { children: React.ReactNode }) 
     Promise.all([
       fetch("/api/public/site").then((r) => (r.ok ? r.json() : null)),
       fetch("/api/public/photos").then((r) => (r.ok ? r.json() : null)),
+      fetch("/api/public/pairs").then((r) => (r.ok ? r.json() : null)),
     ])
-      .then(([siteRes, photoRes]) => {
+      .then(([siteRes, photoRes, pairRes]) => {
         if (gone) return
         setLive({
           site: siteRes?.site
@@ -65,6 +70,8 @@ export function LivePublicProvider({ children }: { children: React.ReactNode }) 
           photos: Array.isArray(photoRes?.photos) && photoRes.photos.length
             ? photoRes.photos
             : fallbackPhotos,
+          // Empty is correct. Never invent a pair if the API is down.
+          pairs: Array.isArray(pairRes?.pairs) ? pairRes.pairs.filter(pairIsPublic) : fallbackPairs,
         })
       })
       .catch(() => {

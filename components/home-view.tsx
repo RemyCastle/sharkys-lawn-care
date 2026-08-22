@@ -3,6 +3,7 @@
 import Image from "next/image"
 
 import { useLive } from "@/components/live-public"
+import { WorkCompares } from "@/components/work-compares"
 import { WorkStack } from "@/components/work-stack"
 import { marks } from "@/lib/site"
 import { phoneTel } from "@/lib/public"
@@ -52,6 +53,7 @@ export function HomeView() {
       <section id="work" className="border-b-4 border-ink bg-ground">
         <div className="mx-auto max-w-5xl px-4 py-12">
           <h2 className="text-5xl">Work</h2>
+          <WorkCompares />
           <WorkStack />
         </div>
       </section>
