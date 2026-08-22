@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Mail, Phone } from "lucide-react"
+import { Mail } from "lucide-react"
 
 import { HeroCard } from "@/components/hero-card"
 import { QuoteForm } from "@/components/quote-form"
@@ -33,19 +33,20 @@ export default function HomePage() {
               {site.town}
             </h1>
             <p className="max-w-md text-xl font-medium text-ink">
-              {site.serviceArea}. Free estimates. Call Jonathan Lopez if the
-              grass got ahead of you.
+              {site.serviceArea}. Free estimates. Message Jonathan Lopez on
+              Facebook if the grass got ahead of you.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <a
-                href={site.phoneTel}
+                href={site.facebook}
+                target="_blank"
+                rel="noreferrer"
                 className={cn(
                   buttonVariants({ variant: "default" }),
                   "h-14 rounded-sm px-5 text-lg font-extrabold"
                 )}
               >
-                <Phone data-icon="inline-start" />
-                Call {site.phoneDisplay}
+                Message on Facebook
               </a>
               <a
                 href={site.emailMailto}
@@ -119,21 +120,25 @@ export default function HomePage() {
             invert
             kicker="Yards"
             title="Work"
-            note="We do not keep a photo set on this site yet. The public shots live on Facebook and Instagram."
+            note="One job photo we have on this site. More live on Facebook and Instagram."
           />
-          <div className="grid gap-4 md:grid-cols-3">
-            {["Cut and edge", "Haul and clean", "Wash and reset"].map((label, index) => (
-              <div key={label} className="sport-card-ink p-5">
-                <p className="font-display text-5xl uppercase text-hot">
-                  {String(index + 1).padStart(2, "0")}
-                </p>
-                <p className="mt-3 font-display text-4xl uppercase">{label}</p>
-                <p className="mt-2 text-sm font-semibold text-ground/80">
-                  Graphic lane. Not a stock yard. Real pictures are on Facebook
-                  and Instagram.
-                </p>
-              </div>
-            ))}
+          <div className="sport-card overflow-hidden">
+            <Image
+              src="/work/pressure-wash-siding.jpg"
+              alt="Pressure-wash job: house siding after a wash"
+              width={720}
+              height={540}
+              className="w-full object-cover"
+              unoptimized
+            />
+            <div className="bg-ink px-4 py-3">
+              <p className="font-display text-3xl uppercase text-ground">
+                Pressure wash
+              </p>
+              <p className="text-sm font-semibold text-ground/80">
+                Real lot. Not a stock download.
+              </p>
+            </div>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
             <a
@@ -167,7 +172,7 @@ export default function HomePage() {
           <SectionHead
             kicker="Book it"
             title="Get a time"
-            note="Four fields. We write you back. Or skip the form and call."
+            note="Four fields. We write you back. Or skip the form and message on Facebook."
           />
           <div className="sport-card p-5">
             <QuoteForm />

@@ -37,21 +37,20 @@ Do **not** create a Web Service. Free web services sleep. This build is files on
 
 Only facts from the business card, Facebook, and Instagram:
 
-- Call [(541) 579-0726](tel:+15415790726)
+- Primary CTA: [Message on Facebook](https://www.facebook.com/people/Sharkys-Lawn-Care-LLC/61590475589390/)
 - Email [sharkyslawncare.541@gmail.com](mailto:sharkyslawncare.541@gmail.com)
-- Facebook: [Sharky's Lawn Care LLC](https://www.facebook.com/people/Sharkys-Lawn-Care-LLC/61590475589390/)
 - Instagram: [@sharkyslawnmowingservice](https://www.instagram.com/sharkyslawnmowingservice/)
 - Owner: Jonathan Lopez
 - Area: Eugene / Springfield and surrounding areas
 
-No street address. No Google URL. The quote form opens a mailto.
+No street address. No Google URL. The quote form opens a mailto. Facebook cover is brand reference only — not hotlinked.
 
 ## Look
 
 Sport card. Hard midday sun. Four colors only: ground `#F4F5F3`, ink `#0B0F0C`, hot `#3F8C10`, steel `#36414C`. Type: Teko + Barlow.
 
-Art is Jonathan’s only:
+Art:
 
-- `public/logo-profile.jpg` — Facebook profile mark (polo shark, walk-behind). Header.
-- `public/cover-polo.jpg` — Facebook cover (same polo shark). Hero banner.
-- Printed card photo (hoodie shark) goes in as `public/card.jpg` when that file is on disk. Do not redraw the shark.
+- `public/mark.svg` — original SVG mark (polo shark, walk-behind). Cover used as brand reference only.
+- `public/cover-polo.jpg` — local copy of their cover for the hero banner. Not a Facebook hotlink.
+- `public/work/pressure-wash-siding.jpg` — real pressure-wash job from their Facebook.

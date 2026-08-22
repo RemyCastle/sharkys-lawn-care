@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { Phone } from "lucide-react"
 
 import { SectionHead } from "@/components/section-head"
 import { buttonVariants } from "@/components/ui/button"
@@ -37,14 +36,15 @@ export default function ServicesPage() {
           ))}
         </div>
         <a
-          href={site.phoneTel}
+          href={site.facebook}
+          target="_blank"
+          rel="noreferrer"
           className={cn(
             buttonVariants({ variant: "default" }),
             "h-14 w-fit rounded-sm px-5 text-lg font-extrabold"
           )}
         >
-          <Phone data-icon="inline-start" />
-          Call {site.phoneDisplay}
+          Message on Facebook
         </a>
       </div>
     </div>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" fill="none" role="img" aria-labelledby="markTitle markDesc">
+  <title id="markTitle">Sharky's Lawn Care mark</title>
+  <desc id="markDesc">Original flat mark. Muscular shark in a green polo and khaki shorts pushing a walk-behind mower. Brand reference only. Not a Facebook file.</desc>
+
+  <ellipse cx="360" cy="668" rx="210" ry="22" fill="#36414C"/>
+
+  <!-- grass patch + flying clippings -->
+  <g fill="#3F8C10" stroke="#0B0F0C" stroke-width="5" stroke-linejoin="round">
+    <path d="M168 548c40-36 92-44 140-28 18 8 14 28-6 30-48 6-90 14-134 20z"/>
+    <path d="M520 430l28-58 22 54z"/>
+    <path d="M562 408l22-50 22 46z"/>
+    <path d="M598 436l18-40 20 38z"/>
+    <path d="M548 472l24-34 16 32z"/>
+    <path d="M588 488l18-28 14 26z"/>
+    <path d="M508 500l16-22 12 20z"/>
+  </g>
+
+  <!-- walk-behind mower ahead of the shark -->
+  <g stroke="#0B0F0C" stroke-width="7" stroke-linejoin="round">
+    <path d="M318 456h210c18 0 30 12 30 26v36c0 14-10 24-26 24H334c-16 0-28-10-28-24v-42c0-12 6-20 12-20z" fill="#0B0F0C"/>
+    <rect x="332" y="468" width="186" height="16" fill="#3F8C10"/>
+    <rect x="392" y="430" width="72" height="36" rx="6" fill="#36414C"/>
+    <path d="M524 474h32v22h-22z" fill="#36414C"/>
+    <circle cx="368" cy="548" r="30" fill="#0B0F0C"/>
+    <circle cx="368" cy="548" r="12" fill="#36414C"/>
+    <circle cx="368" cy="548" r="5" fill="#F4F5F3"/>
+    <circle cx="500" cy="542" r="36" fill="#0B0F0C"/>
+    <circle cx="500" cy="542" r="16" fill="#36414C"/>
+    <circle cx="500" cy="542" r="6" fill="#F4F5F3"/>
+    <path d="M338 456V268c0-12 8-20 20-20h132c12 0 20 8 20 20v28" fill="none" stroke-width="14"/>
+    <path d="M358 248h132" stroke="#36414C" stroke-width="16" stroke-linecap="round"/>
+    <path d="M358 248h132" stroke="#0B0F0C" stroke-width="6" stroke-linecap="round"/>
+  </g>
+
+  <!-- polo shark, standing, pushing -->
+  <g stroke="#0B0F0C" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+    <!-- khaki shorts + legs -->
+    <path d="M196 430c4 52 2 88-4 116h40c8-24 10-62 6-108z" fill="#0B0F0C"/>
+    <path d="M250 434c2 50 0 86-6 112h40c8-22 10-60 6-104z" fill="#0B0F0C"/>
+    <path d="M188 518h48c4 6 2 12-4 12h-40c-8 0-10-6-4-12z" fill="#36414C"/>
+    <path d="M244 518h46c4 6 2 12-4 12h-38c-8 0-10-6-4-12z" fill="#36414C"/>
+    <path d="M198 398c8 28 12 44 16 52h78c6-12 10-32 8-52-28 8-70 8-102 0z" fill="#C4B48A"/>
+    <!-- polo -->
+    <path d="M188 248c-6 70 18 128 58 160 36-14 70-36 82-70-4-44-32-88-78-112-22-12-56-6-62 22z" fill="#3F8C10"/>
+    <path d="M248 248c18 6 40 8 58 2" stroke="#0B0F0C" stroke-width="6"/>
+    <path d="M236 236l18 22-20 6c-2-10-2-20 2-28z" fill="#F4F5F3"/>
+    <path d="M252 236l18 22 4-20c-6-6-14-8-22-2z" fill="#F4F5F3"/>
+    <!-- arms on the bar -->
+    <path d="M250 268c48 2 104-4 168-20 8 16 2 36-14 44-54 14-112 20-164 10-10-10-6-26 10-34z" fill="#3F8C10"/>
+    <ellipse cx="412" cy="254" rx="18" ry="14" fill="#36414C"/>
+    <ellipse cx="478" cy="244" rx="18" ry="14" fill="#36414C"/>
+    <!-- fin + head -->
+    <path d="M268 96l28 64-58 8c12-26 20-48 30-72z" fill="#36414C"/>
+    <ellipse cx="230" cy="186" rx="68" ry="56" fill="#36414C"/>
+    <path d="M266 168c28 8 60 24 76 44-18 14-46 22-80 18" fill="#36414C"/>
+    <path d="M188 196c18 18 56 26 96 8" stroke="#F4F5F3" stroke-width="14"/>
+    <ellipse cx="216" cy="170" rx="11" ry="13" fill="#0B0F0C"/>
+    <circle cx="220" cy="164" r="3.5" fill="#F4F5F3"/>
+    <ellipse cx="252" cy="166" rx="11" ry="13" fill="#0B0F0C"/>
+    <circle cx="256" cy="160" r="3.5" fill="#F4F5F3"/>
+    <path d="M208 214h70c4 12-8 26-34 28-24-2-38-14-36-28z" fill="#0B0F0C"/>
+    <path d="M220 218h11l3 10h-10z" fill="#F4F5F3" stroke-width="3"/>
+    <path d="M236 218h11l3 10h-10z" fill="#F4F5F3" stroke-width="3"/>
+    <path d="M252 218h11l3 10h-10z" fill="#F4F5F3" stroke-width="3"/>
+  </g>
+</svg>

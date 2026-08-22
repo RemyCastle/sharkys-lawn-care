@@ -12,7 +12,7 @@ export function HeroCard() {
       transition={{ type: "spring", stiffness: 420, damping: 28 }}
     >
       <Image
-        src="/logo-profile.jpg"
+        src="/mark.svg"
         alt="Sharky's Lawn Care mark: polo shark pushing a walk-behind mower"
         width={720}
         height={720}

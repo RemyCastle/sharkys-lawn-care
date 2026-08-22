@@ -9,7 +9,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-3">
         <div className="flex flex-col gap-2">
           <Image
-            src="/logo-profile.jpg"
+            src="/mark.svg"
             alt="Sharky's Lawn Care"
             width={160}
             height={160}
@@ -29,14 +29,11 @@ export function SiteFooter() {
         </div>
         <div className="flex flex-col gap-2 text-sm font-semibold">
           <p className="font-display text-3xl uppercase leading-none">Talk</p>
-          <a href={site.phoneTel} className="hover:text-hot">
-            {site.phoneDisplay}
+          <a href={site.facebook} target="_blank" rel="noreferrer" className="hover:text-hot">
+            Message on Facebook
           </a>
           <a href={site.emailMailto} className="hover:text-hot">
             {site.email}
-          </a>
-          <a href={site.facebook} target="_blank" rel="noreferrer" className="hover:text-hot">
-            Facebook
           </a>
           <a href={site.instagram} target="_blank" rel="noreferrer" className="hover:text-hot">
             Instagram {site.instagramHandle}
