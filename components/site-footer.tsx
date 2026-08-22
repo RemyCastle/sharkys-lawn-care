@@ -48,6 +48,9 @@ export function SiteFooter() {
           <Link href="/work/" className="hover:text-hot">
             Work
           </Link>
+          <a href="#reviews" className="hover:text-hot">
+            Reviews
+          </a>
           <a href="#quote" className="hover:text-hot">
             {site.cta_secondary}
           </a>
