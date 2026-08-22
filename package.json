@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "pages:deploy": "npm run build && wrangler pages deploy out --project-name=sharkys-lawn-care"
+    "pages:deploy": "npm run build && npx wrangler pages deploy out --project-name=sharkys-lawn-care"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
