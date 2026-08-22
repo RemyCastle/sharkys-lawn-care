@@ -5,55 +5,89 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { jobPhotos } from "@/lib/site"
 
 const DRAG_PX = 8
+const SNAP_RATIO = 0.22
+const FLICK_PX_MS = 0.45
+
+function prefersReduce() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches
+}
 
 export function WorkStream() {
   const scrollerRef = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
-  const pointer = useRef({ x: 0, dragging: false })
+  const gesture = useRef({
+    x: 0,
+    t: 0,
+    index: 0,
+    dragging: false,
+    pointerId: -1,
+  })
 
-  const updateActive = useCallback(() => {
+  const slideAt = useCallback((left: number) => {
     const root = scrollerRef.current
-    if (!root) return
+    if (!root) return 0
     const slides = Array.from(root.children) as HTMLElement[]
-    const mid = root.scrollLeft + root.clientWidth / 2
     let best = 0
     let bestDist = Number.POSITIVE_INFINITY
     slides.forEach((slide, index) => {
-      const center = slide.offsetLeft + slide.clientWidth / 2
-      const dist = Math.abs(center - mid)
+      const dist = Math.abs(slide.offsetLeft - left)
       if (dist < bestDist) {
         bestDist = dist
         best = index
       }
     })
-    setActive(best)
+    return best
+  }, [])
+
+  const goTo = useCallback((index: number, instant = false) => {
+    const root = scrollerRef.current
+    const slide = root?.children[index] as HTMLElement | undefined
+    if (!root || !slide) return
+    const next = Math.max(0, Math.min(index, jobPhotos.length - 1))
+    const target = (root.children[next] as HTMLElement).offsetLeft
+    root.scrollTo({
+      left: target,
+      behavior: instant || prefersReduce() ? "auto" : "smooth",
+    })
+    setActive(next)
   }, [])
 
   useEffect(() => {
     const root = scrollerRef.current
     if (!root) return
-    updateActive()
-    root.addEventListener("scroll", updateActive, { passive: true })
-    return () => root.removeEventListener("scroll", updateActive)
-  }, [updateActive])
+    const onScroll = () => setActive(slideAt(root.scrollLeft))
+    onScroll()
+    root.addEventListener("scroll", onScroll, { passive: true })
+    return () => root.removeEventListener("scroll", onScroll)
+  }, [slideAt])
 
-  const goTo = (index: number, instant = false) => {
+  const endGesture = (clientX: number) => {
     const root = scrollerRef.current
-    const slide = root?.children[index] as HTMLElement | undefined
-    if (!slide) return
-    const reduce =
-      instant ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    slide.scrollIntoView({
-      behavior: reduce ? "auto" : "smooth",
-      inline: "start",
-      block: "nearest",
-    })
+    const g = gesture.current
+    if (!root) return
+    if (g.pointerId >= 0 && root.hasPointerCapture(g.pointerId)) {
+      root.releasePointerCapture(g.pointerId)
+    }
+    if (!g.dragging) return
+
+    const dx = g.x - clientX
+    const dt = Math.max(1, performance.now() - g.t)
+    const velocity = dx / dt
+    const far = Math.abs(dx) > root.clientWidth * SNAP_RATIO
+    const flick = Math.abs(velocity) >= FLICK_PX_MS
+    let next = g.index
+    if (far || flick) {
+      next = dx > 0 ? g.index + 1 : g.index - 1
+    }
+    goTo(next)
+    g.dragging = false
+    g.pointerId = -1
   }
 
   return (
-    <div id="work" className="mt-8">
+    <div className="mt-8">
       <div
+        id="work"
         ref={scrollerRef}
         className="work-stream"
         role="region"
@@ -61,21 +95,32 @@ export function WorkStream() {
         aria-label="Job photos"
         tabIndex={0}
         onPointerDown={(event) => {
-          pointer.current = { x: event.clientX, dragging: false }
-        }}
-        onPointerMove={(event) => {
-          if (Math.abs(event.clientX - pointer.current.x) >= DRAG_PX) {
-            pointer.current.dragging = true
+          gesture.current = {
+            x: event.clientX,
+            t: performance.now(),
+            index: active,
+            dragging: false,
+            pointerId: event.pointerId,
           }
         }}
+        onPointerMove={(event) => {
+          const g = gesture.current
+          if (g.pointerId !== event.pointerId) return
+          if (!g.dragging && Math.abs(event.clientX - g.x) >= DRAG_PX) {
+            g.dragging = true
+            event.currentTarget.setPointerCapture(event.pointerId)
+          }
+        }}
+        onPointerUp={(event) => endGesture(event.clientX)}
+        onPointerCancel={(event) => endGesture(event.clientX)}
         onKeyDown={(event) => {
           if (event.key === "ArrowRight") {
             event.preventDefault()
-            goTo(Math.min(active + 1, jobPhotos.length - 1))
+            goTo(active + 1)
           }
           if (event.key === "ArrowLeft") {
             event.preventDefault()
-            goTo(Math.max(active - 1, 0))
+            goTo(active - 1)
           }
         }}
       >
@@ -92,12 +137,9 @@ export function WorkStream() {
               decoding="async"
               draggable={false}
               onClick={() => {
-                if (pointer.current.dragging) return
+                if (gesture.current.dragging) return
                 document.getElementById("quote")?.scrollIntoView({
-                  behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
-                    .matches
-                    ? "auto"
-                    : "smooth",
+                  behavior: prefersReduce() ? "auto" : "smooth",
                 })
               }}
             />

@@ -125,7 +125,12 @@
   overscroll-behavior-x: contain;
   touch-action: pan-x;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   padding-bottom: 0.35rem;
+}
+
+.work-stream::-webkit-scrollbar {
+  display: none;
 }
 
 .work-slide {
@@ -137,6 +142,7 @@
 @media (prefers-reduced-motion: reduce) {
   .work-stream {
     scroll-behavior: auto;
+    scroll-snap-type: x mandatory;
   }
 }
 
