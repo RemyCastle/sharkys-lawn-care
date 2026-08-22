@@ -35,16 +35,15 @@ Do **not** create a Web Service. Free web services sleep. This build is files on
 
 ## Contact on the site
 
-Only facts from the business card, Facebook, and Instagram:
+Only facts from the business card and Facebook:
 
 - Primary CTA: Call [(541) 579-0726](tel:+15415790726)
 - Email [sharkyslawncare.541@gmail.com](mailto:sharkyslawncare.541@gmail.com)
-- Facebook message: [Sharky's Lawn Care LLC](https://www.facebook.com/people/Sharkys-Lawn-Care-LLC/61590475589390/)
-- Instagram: [@sharkyslawnmowingservice](https://www.instagram.com/sharkyslawnmowingservice/)
+- Facebook: [Sharky's Lawn Care LLC](https://www.facebook.com/people/Sharkys-Lawn-Care-LLC/61590475589390/)
 - Owner: Jonathan Lopez
-- Area: Eugene / Springfield
+- Area: Eugene / Springfield, OR
 
-No street address. No Google URL. The quote form opens a mailto.
+No shop street on the site. No Instagram. No Google URL. The quote sheet is mailto.
 
 ## Look
 
@@ -56,4 +55,4 @@ Art:
 - `public/cover-polo.jpg` — local copy of their cover. Brand reference only. Not the hero.
 - `public/work/pressure-wash-siding.jpg` — real pressure-wash job. This is the hero and the before/after swipe.
 
-Quote is an in-page `#quote` sheet (name, phone, town, job). No Typeform. Submit is mailto. Sticky thumb dock: Call, Email, Facebook.
+Quote is an in-page `#quote` sheet (name, phone, town, what you need, optional street). No Typeform. Submit is mailto. Sticky thumb dock: Call, Email, Facebook.

@@ -21,7 +21,7 @@ export function SiteHeader() {
         <Link href="/" className="flex min-w-0 items-center gap-3">
           <Image
             src="/mark.svg"
-            alt="Sharky's Lawn Care"
+            alt="Sharky's Lawn Care LLC"
             width={72}
             height={72}
             className="size-14 shrink-0 object-contain"
@@ -33,7 +33,7 @@ export function SiteHeader() {
               Sharky&apos;s
             </span>
             <span className="block truncate text-[11px] font-extrabold uppercase tracking-[0.16em] text-steel">
-              {site.domain}
+              Lawn Care LLC
             </span>
           </span>
         </Link>

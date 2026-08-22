@@ -1,12 +1,12 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Mail, Phone } from "lucide-react"
+import { Phone } from "lucide-react"
 
 import { BeforeAfter } from "@/components/before-after"
 import { QuoteLink } from "@/components/quote-link"
 import { SectionHead } from "@/components/section-head"
 import { buttonVariants } from "@/components/ui/button"
-import { facts, jobPhoto, services, site } from "@/lib/site"
+import { jobPhoto, services, site } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
 export default function HomePage() {
@@ -30,7 +30,7 @@ export default function HomePage() {
                 {site.heroKicker}
               </p>
               <h1 className="text-5xl text-ground sm:text-6xl md:text-7xl">
-                Springfield lawns.
+                Eugene and Springfield lawns.
                 <br />
                 We cut them.
               </h1>
@@ -47,16 +47,6 @@ export default function HomePage() {
                   <Phone data-icon="inline-start" />
                   Call {site.phoneDisplay}
                 </a>
-                <a
-                  href={site.emailMailto}
-                  className={cn(
-                    buttonVariants({ variant: "outline" }),
-                    "h-12 rounded-sm border-2 border-ground bg-transparent px-5 text-base font-extrabold text-ground hover:bg-ground hover:text-ink"
-                  )}
-                >
-                  <Mail data-icon="inline-start" />
-                  {site.email}
-                </a>
                 <QuoteLink
                   className={cn(
                     buttonVariants({ variant: "outline" }),
@@ -65,42 +55,15 @@ export default function HomePage() {
                 >
                   Get a time
                 </QuoteLink>
-                <a
-                  href={site.facebook}
-                  rel="noreferrer"
-                  className="text-sm font-extrabold uppercase tracking-wider text-ground/80 hover:text-ground"
-                >
-                  Facebook message
-                </a>
               </div>
-              <p className="font-display text-2xl uppercase text-ground/80">
-                {site.owner}
-              </p>
             </div>
           </div>
         </div>
       </section>
 
       <section className="border-b-4 border-ink bg-ground">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 px-4 py-6 md:grid-cols-5">
-          {facts.map((fact) => (
-            <div
-              key={fact}
-              className="sport-card px-3 py-4 text-center font-display text-2xl uppercase leading-none md:text-3xl"
-            >
-              {fact}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="border-b-4 border-ink bg-ground">
         <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-12">
-          <SectionHead
-            kicker="The list"
-            title="Services"
-            note="Same work as the card back."
-          />
+          <SectionHead kicker="The list" title="Work" note={site.workNote} />
           <div className="grid gap-4 md:grid-cols-2">
             {services.map((service, index) => (
               <Link
@@ -115,9 +78,11 @@ export default function HomePage() {
                   <span className="block font-display text-3xl uppercase leading-none">
                     {service.name}
                   </span>
-                  <span className="mt-1 block text-sm font-semibold">
-                    {service.card}
-                  </span>
+                  {service.card ? (
+                    <span className="mt-1 block text-sm font-semibold">
+                      {service.card}
+                    </span>
+                  ) : null}
                 </span>
               </Link>
             ))}
@@ -127,12 +92,6 @@ export default function HomePage() {
 
       <section className="border-b-4 border-ink bg-steel text-ground">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-12">
-          <SectionHead
-            invert
-            kicker="Yards"
-            title="Work"
-            note="One job photo. Slide before and after. Tap to book."
-          />
           <BeforeAfter />
           <QuoteLink
             job={jobPhoto.job}
@@ -143,6 +102,13 @@ export default function HomePage() {
           >
             Get a time
           </QuoteLink>
+        </div>
+      </section>
+
+      <section className="border-b-4 border-ink bg-ground">
+        <div className="mx-auto max-w-6xl px-4 py-12">
+          <SectionHead kicker="About" title={site.owner} />
+          <p className="mt-6 max-w-2xl text-xl font-medium">{site.about}</p>
         </div>
       </section>
     </div>

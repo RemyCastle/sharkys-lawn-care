@@ -18,27 +18,28 @@ export function SiteFooter() {
             unoptimized
           />
           <p className="font-display text-4xl uppercase leading-none">
-            Sharky&apos;s Lawn Care
+            Sharky&apos;s Lawn Care LLC
           </p>
         </div>
         <p className="max-w-3xl text-base font-semibold leading-relaxed">
-          Sharky&apos;s Lawn Care · Eugene / Springfield ·{" "}
+          Sharky&apos;s Lawn Care LLC · {site.owner} · Eugene / Springfield, OR ·{" "}
           <a href={site.phoneTel} className="underline decoration-hot underline-offset-4">
             {site.phoneDisplay}
           </a>{" "}
-          · Insured and bonded · 10+ years
+          ·{" "}
+          <a href={site.emailMailto} className="underline decoration-hot underline-offset-4">
+            {site.email}
+          </a>{" "}
+          · {site.domain} ·{" "}
+          <a
+            href={site.facebook}
+            rel="noreferrer"
+            className="break-all underline decoration-hot underline-offset-4"
+          >
+            {site.facebook}
+          </a>
         </p>
         <div className="flex flex-col gap-2 text-sm font-semibold sm:flex-row sm:flex-wrap sm:gap-x-6">
-          <a href={site.emailMailto} className="hover:text-hot">
-            {site.email}
-          </a>
-          <a href={site.facebook} target="_blank" rel="noreferrer" className="hover:text-hot">
-            Facebook message
-          </a>
-          <a href={site.instagram} target="_blank" rel="noreferrer" className="hover:text-hot">
-            Instagram {site.instagramHandle}
-          </a>
-          <span>{site.owner}</span>
           <Link href="/" className="hover:text-hot">
             Home
           </Link>
@@ -50,7 +51,6 @@ export function SiteFooter() {
           </Link>
           <QuoteLink className="hover:text-hot">Get a time</QuoteLink>
         </div>
-        <p className="text-sm text-ground/70">{site.domain}</p>
       </div>
     </footer>
   )

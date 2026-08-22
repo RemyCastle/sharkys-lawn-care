@@ -104,10 +104,7 @@ export function QuoteSheet() {
             <X className="size-5" />
           </button>
         </div>
-        <div className="max-h-[min(70dvh,32rem)] overflow-y-auto px-4 py-5">
-          <p className="mb-5 text-base font-semibold text-steel">
-            Name, phone, town, job. Or just call.
-          </p>
+        <div className="max-h-[min(74dvh,38rem)] overflow-y-auto px-4 py-5">
           <QuoteForm jobPrefill={job} />
         </div>
       </div>

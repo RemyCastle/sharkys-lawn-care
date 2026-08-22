@@ -8,8 +8,8 @@ import { jobPhoto, services, site } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
-  title: "Work",
-  description: `A real ${site.name} pressure-wash job, plus Facebook and Instagram for more shots.`,
+  title: "Yards",
+  description: `A real ${site.name} pressure-wash job. More on Facebook.`,
 }
 
 export default function WorkPage() {
@@ -17,11 +17,7 @@ export default function WorkPage() {
     <div className="bg-ground">
       <div className="jersey-band h-4" />
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-12">
-        <SectionHead
-          kicker="Yards"
-          title="Work"
-          note="One job photo. Slide before and after. Tap the photo to get a time."
-        />
+        <SectionHead kicker="Yards" title="Work" note={site.workNote} />
         <BeforeAfter />
         <QuoteLink
           job={jobPhoto.job}
@@ -33,9 +29,10 @@ export default function WorkPage() {
           Get a time
         </QuoteLink>
         <div className="sport-card-steel p-6">
-          <p className="font-display text-4xl uppercase">More shots</p>
-          <p className="mt-2 max-w-xl text-ground/90">
-            Facebook and Instagram hold the rest.
+          <p className="mt-2 max-w-xl break-all text-ground/90">
+            <a href={site.facebook} rel="noreferrer" className="underline decoration-hot underline-offset-4">
+              {site.facebook}
+            </a>
           </p>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row">
             <a
@@ -46,26 +43,6 @@ export default function WorkPage() {
               )}
             >
               Call {site.phoneDisplay}
-            </a>
-            <a
-              href={site.facebook}
-              rel="noreferrer"
-              className={cn(
-                buttonVariants({ variant: "outline" }),
-                "inline-flex h-12 rounded-sm border-2 px-5 text-base font-extrabold"
-              )}
-            >
-              Facebook message
-            </a>
-            <a
-              href={site.instagram}
-              rel="noreferrer"
-              className={cn(
-                buttonVariants({ variant: "outline" }),
-                "inline-flex h-12 rounded-sm border-2 px-5 text-base font-extrabold"
-              )}
-            >
-              {site.instagramHandle}
             </a>
           </div>
         </div>

@@ -13,8 +13,8 @@ export function QuoteForm({ jobPrefill = "" }: { jobPrefill?: string }) {
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
   const [town, setTown] = useState("")
+  const [street, setStreet] = useState("")
   const [job, setJob] = useState(jobPrefill)
-  const [sent, setSent] = useState(false)
 
   useEffect(() => {
     if (jobPrefill) setJob(jobPrefill)
@@ -24,7 +24,15 @@ export function QuoteForm({ jobPrefill = "" }: { jobPrefill?: string }) {
     event.preventDefault()
     const subject = encodeURIComponent(`Estimate — ${town || "yard"} — ${name || "new"}`)
     const body = encodeURIComponent(
-      `Name: ${name}\nPhone: ${phone}\nTown: ${town}\nJob: ${job}`
+      [
+        `Name: ${name}`,
+        `Phone: ${phone}`,
+        `Town: ${town}`,
+        street ? `Street: ${street}` : null,
+        `What you need: ${job}`,
+      ]
+        .filter(Boolean)
+        .join("\n")
     )
     const mailbox = document.createElement("a")
     mailbox.href = `${site.emailMailto}?subject=${subject}&body=${body}`
@@ -32,7 +40,6 @@ export function QuoteForm({ jobPrefill = "" }: { jobPrefill?: string }) {
     document.body.appendChild(mailbox)
     mailbox.click()
     mailbox.remove()
-    setSent(true)
   }
 
   return (
@@ -76,7 +83,7 @@ export function QuoteForm({ jobPrefill = "" }: { jobPrefill?: string }) {
           />
         </Field>
         <Field>
-          <FieldLabel htmlFor="quote-job">Job</FieldLabel>
+          <FieldLabel htmlFor="quote-job">What you need</FieldLabel>
           <Textarea
             id="quote-job"
             name="job"
@@ -84,8 +91,19 @@ export function QuoteForm({ jobPrefill = "" }: { jobPrefill?: string }) {
             rows={4}
             value={job}
             onChange={(event) => setJob(event.target.value)}
-            placeholder="Mow, blackberries, mulch, cleanup…"
             className="rounded-sm border-2 bg-ground"
+          />
+        </Field>
+        <Field>
+          <FieldLabel htmlFor="quote-street">Street</FieldLabel>
+          <Input
+            id="quote-street"
+            name="street"
+            autoComplete="street-address"
+            value={street}
+            onChange={(event) => setStreet(event.target.value)}
+            placeholder="Customer's, for the crew"
+            className="h-12 rounded-sm border-2 bg-ground"
           />
         </Field>
       </FieldGroup>
@@ -96,11 +114,7 @@ export function QuoteForm({ jobPrefill = "" }: { jobPrefill?: string }) {
         <Mail data-icon="inline-start" />
         Email the job
       </Button>
-      <p className="text-sm text-steel">
-        {sent
-          ? `Stays here. Your mail app should open to ${site.email}.`
-          : `Stays in this sheet. Writes to ${site.email}. Or call ${site.phoneDisplay}.`}
-      </p>
+      <p className="text-sm text-steel">{site.quoteHelper}</p>
     </form>
   )
 }

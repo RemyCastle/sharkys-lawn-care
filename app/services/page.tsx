@@ -7,19 +7,15 @@ import { services, site } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
-  title: "Services",
-  description: `Lawn work from ${site.name}: mowing, clean-ups, mulch, debris, blackberries, pressure wash, thatch and aerate.`,
+  title: "Work",
+  description: `${site.heroLead} ${site.workNote}`,
 }
 
 export default function ServicesPage() {
   return (
     <div className="sun-field">
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-12">
-        <SectionHead
-          kicker="The list"
-          title="Services"
-          note="Mow, edge, trim, blow. Then mulch, blackberries, thatch, cleanup, pressure wash."
-        />
+        <SectionHead kicker="The list" title="Work" note={site.workNote} />
         <div className="flex flex-col gap-4">
           {services.map((service, index) => (
             <article key={service.slug} className="sport-card grid gap-3 p-5 md:grid-cols-[88px_1fr]">
@@ -28,10 +24,9 @@ export default function ServicesPage() {
               </p>
               <div>
                 <h3 className="text-4xl md:text-5xl">{service.name}</h3>
-                <p className="mt-1 text-sm font-extrabold uppercase tracking-wider text-steel">
-                  {service.card}
-                </p>
-                <p className="mt-3 max-w-2xl text-lg">{service.blurb}</p>
+                {service.card ? (
+                  <p className="mt-1 text-lg font-semibold">— {service.card}</p>
+                ) : null}
               </div>
             </article>
           ))}
