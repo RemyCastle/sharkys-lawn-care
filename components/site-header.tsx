@@ -1,7 +1,7 @@
-import Image from "next/image"
 import Link from "next/link"
 import { Phone } from "lucide-react"
 
+import { BrandMark } from "@/components/brand-mark"
 import { QuoteLink } from "@/components/quote-link"
 import { buttonVariants } from "@/components/ui/button"
 import { site } from "@/lib/site"
@@ -19,14 +19,9 @@ export function SiteHeader() {
       <div className="jersey-band h-2" />
       <div className="mx-auto flex h-[4.75rem] max-w-6xl items-center justify-between gap-3 px-4">
         <Link href="/" className="flex min-w-0 items-center gap-3">
-          <Image
-            src="/mark.svg"
-            alt="Sharky's Lawn Care LLC"
-            width={72}
-            height={72}
-            className="size-14 shrink-0 object-contain"
-            unoptimized
+          <BrandMark
             priority
+            className="h-14 w-auto max-w-[9.5rem] shrink-0 border-2 border-ink"
           />
           <span className="min-w-0">
             <span className="block font-display text-2xl leading-none uppercase">

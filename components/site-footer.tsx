@@ -1,6 +1,6 @@
-import Image from "next/image"
 import Link from "next/link"
 
+import { BrandMark } from "@/components/brand-mark"
 import { QuoteLink } from "@/components/quote-link"
 import { site } from "@/lib/site"
 
@@ -9,14 +9,7 @@ export function SiteFooter() {
     <footer className="border-t-4 border-ink bg-ink text-ground">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10">
         <div className="flex items-center gap-4">
-          <Image
-            src="/mark.svg"
-            alt=""
-            width={72}
-            height={72}
-            className="size-16 bg-white object-contain"
-            unoptimized
-          />
+          <BrandMark className="h-16 w-auto max-w-[11rem] border-2 border-ground" />
           <p className="font-display text-4xl uppercase leading-none">
             Sharky&apos;s Lawn Care LLC
           </p>

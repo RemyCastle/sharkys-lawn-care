@@ -26,6 +26,11 @@ export const site = {
   quoteHelper: "Or call (541) 579-0726.",
 } as const
 
+export const marks = {
+  hoodieRider: "/card-hoodie-rider.jpg",
+  coverPolo: "/cover-polo.jpg",
+} as const
+
 export const jobPhoto = {
   src: "/work/pressure-wash-siding.jpg",
   alt: "Pressure-wash job: house siding, part washed, part still oxidized",

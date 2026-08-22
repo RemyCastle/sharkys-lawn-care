@@ -51,10 +51,10 @@ No hours (none public). No star scores. No Instagram. No Google URL. No Sparky's
 
 Sport card. Hard midday sun. Four colors only: ground `#F4F5F3`, ink `#0B0F0C`, hot `#3F8C10`, steel `#36414C`. Type: Teko + Barlow.
 
-Art:
+Art (two official marks only — no third shark, no 3D):
 
-- `public/mark.svg` — original SVG mark (polo shark, walk-behind). Cover used as brand reference only.
-- `public/cover-polo.jpg` — local copy of their cover. Brand reference only. Not the hero.
+- `public/card-hoodie-rider.jpg` — primary mark (hoodie shark on a riding mower). Header and footer. Chat attachments of this card have not been landing on disk; drop the file in `public/` if the header image is missing.
+- `public/cover-polo.jpg` — polo shark with walk-behind. Facebook cover reference.
 - `public/work/pressure-wash-siding.jpg` — real pressure-wash job. This is the hero and the before/after swipe.
 
 Quote is an in-page `#quote` sheet (name, phone, town, what you need, optional street). No Typeform. Submit is mailto. Sticky thumb dock: Call, Email, Facebook.
