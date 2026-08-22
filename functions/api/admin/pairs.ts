@@ -106,7 +106,9 @@ export async function onRequestPatch({ request, env }: { request: Request; env: 
   if (!id) return json({ error: "Missing pair." }, 400)
   const row = await env.DB.prepare(
     "SELECT before_src, after_src, caption, visible FROM pairs WHERE id = ?",
-  ).first<PairRow>()
+  )
+    .bind(id)
+    .first<PairRow>()
   if (!row) return json({ error: "Missing pair." }, 404)
   const caption = body.caption !== undefined ? String(body.caption).trim() : row.caption
   if (body.caption !== undefined && !caption) {
