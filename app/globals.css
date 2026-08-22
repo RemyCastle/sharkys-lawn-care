@@ -3,9 +3,9 @@
 @import "shadcn/tailwind.css";
 
 @theme inline {
-  --color-background: #ffffff;
+  --color-background: #f4f5f3;
   --color-foreground: #0b0f0c;
-  --color-ground: #ffffff;
+  --color-ground: #f4f5f3;
   --color-ink: #0b0f0c;
   --color-hot: #3f8c10;
   --color-deep: #2e590f;
@@ -24,7 +24,7 @@
 }
 
 :root {
-  --background: #ffffff;
+  --background: #f4f5f3;
   --foreground: #0b0f0c;
   --primary: #3f8c10;
   --primary-foreground: #ffffff;
@@ -38,12 +38,12 @@
   html {
     scroll-behavior: smooth;
     font-family: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
-    background: #ffffff;
+    background: #f4f5f3;
     color: #0b0f0c;
   }
 
   body {
-    background: #ffffff;
+    background: #f4f5f3;
     color: #0b0f0c;
   }
 
@@ -108,6 +108,11 @@
 .field-ink:focus {
   outline: 3px solid #3f8c10;
   outline-offset: 0;
+}
+
+.work-cap {
+  text-transform: none;
+  letter-spacing: 0.01em;
 }
 
 .stripe {

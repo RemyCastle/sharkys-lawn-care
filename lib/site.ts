@@ -49,6 +49,7 @@ export const jobPhotos = [
     caption: "Pressure Wash",
     width: 720,
     height: 540,
+    fill: true,
   },
   {
     src: "/work/ig-02.jpg",
@@ -56,13 +57,7 @@ export const jobPhotos = [
     caption: "General Maintenance (Edging, Blowing, Trimming, Mowing)",
     width: 361,
     height: 640,
-  },
-  {
-    src: "/work/ig-03.jpg",
-    alt: "White work truck with an open tailgate and a worker in a neon vest on a front lawn",
-    caption: "Job site",
-    width: 360,
-    height: 640,
+    fill: false,
   },
 ] as const
 
