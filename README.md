@@ -54,9 +54,8 @@ Sport card. Hard midday sun. Four colors only: ground `#F4F5F3`, ink `#0B0F0C`, 
 
 Art (two official rasters only — no third shark, no 3D, no rider logo):
 
-- `public/logo-profile.jpg` — polo-shark mark. Header and footer.
-- `public/cover-polo.jpg` — Facebook cover reference.
-- `public/card.jpg` — printed card photo (not a logo).
-- `public/work/pressure-wash-siding.jpg` — real pressure-wash job. Hero and swipe.
+- `public/logo-profile.jpg` — polo-shark mark. Header, footer, and hero picture.
+- `public/cover-polo.jpg` — Facebook cover on the home page.
+- `public/work/pressure-wash-siding.jpg` — real pressure-wash job in a simple grid.
 
-Quote is an in-page `#quote` sheet (name, phone, town, what you need, optional street). No Typeform. Submit is mailto. Sticky thumb dock: Call, Email, Facebook.
+Look is a printed sport card on ground `#F4F5F3`. Primary CTA is Call. Secondary is Email the job. Quote is in-page `#quote`. Dock: Call, Email, IG, Facebook.

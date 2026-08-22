@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Barlow, Teko } from "next/font/google"
 
-import { QuoteSheet } from "@/components/quote-sheet"
+import { QuoteBlock } from "@/components/quote-block"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { ThumbDock } from "@/components/thumb-dock"
@@ -49,12 +49,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${barlow.variable} ${teko.variable} h-full`}>
-      <body className="flex min-h-full flex-col pb-24">
+      <body className="flex min-h-full flex-col bg-ground pb-24">
         <SiteHeader />
         <main className="flex-1">{children}</main>
+        <QuoteBlock />
         <SiteFooter />
         <ThumbDock />
-        <QuoteSheet />
       </body>
     </html>
   )

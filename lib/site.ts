@@ -24,7 +24,7 @@ export const site = {
     "Mow, edge, trim, blow. Then the jobs that wait: mulch, blackberries, thatch, cleanup, pressure wash.",
   workNote: "Houses and businesses. Eugene, Springfield, and around here.",
   about:
-    "Jonathan Lopez. Locally owned. Insured and bonded. More than ten years on lawns. Estimates are free. Call if you want a number on the work.",
+    "Jonathan Lopez. Locally owned. Insured and bonded. 10+ years. Free estimates.",
   quoteHelper: "Or call (541) 579-0726.",
 } as const
 
@@ -34,13 +34,15 @@ export const marks = {
   card: "/card.jpg",
 } as const
 
-export const jobPhoto = {
-  src: "/work/pressure-wash-siding.jpg",
-  alt: "Pressure-wash job: house siding, part washed, part still oxidized",
-  job: "Pressure wash",
-  width: 720,
-  height: 540,
-} as const
+export const jobPhotos = [
+  {
+    src: "/work/pressure-wash-siding.jpg",
+    alt: "Pressure-wash job: house siding, part washed, part still oxidized",
+    caption: "Pressure wash",
+    width: 720,
+    height: 540,
+  },
+] as const
 
 export const services = [
   {

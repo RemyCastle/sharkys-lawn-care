@@ -13,10 +13,10 @@ export function BrandMark({
   return (
     <Image
       src={marks.logoProfile}
-      alt="Sharky's Lawn Care LLC"
+      alt="Sharky's Lawn Care"
       width={220}
       height={220}
-      className={cn("bg-white object-contain", className)}
+      className={cn("h-16 w-auto bg-white object-contain", className)}
       unoptimized
       priority={priority}
     />
