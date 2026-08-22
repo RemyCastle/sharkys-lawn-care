@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   description: `${site.heroTitle} ${site.heroLead} ${site.ctaPrimary}.`,
   applicationName: site.name,
   icons: {
-    icon: "/logo-profile.jpg",
+    icon: "/logo-mark.png",
   },
   openGraph: {
     title: `${site.name} · ${site.townShort}`,
@@ -49,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${barlow.variable} ${teko.variable} h-full`}>
-      <body className="flex min-h-full flex-col bg-ground pb-32">
+      <body className="flex min-h-full flex-col bg-ground pb-40 md:pb-8">
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <QuoteBlock />

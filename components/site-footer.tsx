@@ -8,7 +8,7 @@ export function SiteFooter() {
   return (
     <footer className="border-t-4 border-ink bg-white text-ink">
       <div className="mx-auto flex max-w-5xl flex-col gap-5 px-4 py-10">
-        <BrandMark className="h-20 bg-white" />
+        <BrandMark className="h-20" />
         <p className="max-w-2xl text-base font-semibold leading-relaxed">
           {site.address}
           <br />

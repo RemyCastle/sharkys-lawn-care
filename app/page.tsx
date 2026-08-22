@@ -6,14 +6,14 @@ export default function HomePage() {
   return (
     <div className="bg-ground">
       <section className="border-b-4 border-ink bg-ground">
-        <div className="mx-auto max-w-5xl px-4 py-6">
-          <div className="vinyl overflow-hidden bg-white">
+        <div className="mx-auto max-w-5xl px-4 py-8">
+          <div className="vinyl mx-auto w-full max-w-xl overflow-hidden">
             <Image
               src={marks.coverPolo}
               alt="Sharky's Lawn Care printed card: polo shark, walk-behind mower, and the service list"
               width={960}
               height={400}
-              className="w-full object-contain"
+              className="h-auto w-full object-contain"
               unoptimized
               priority
             />
@@ -52,7 +52,7 @@ export default function HomePage() {
       <section className="border-b-4 border-ink bg-white">
         <div className="mx-auto max-w-5xl px-4 py-12">
           <h2 className="text-5xl">Work</h2>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
             {jobPhotos.map((photo) => (
               <figure key={photo.src} className="vinyl overflow-hidden">
                 <Image

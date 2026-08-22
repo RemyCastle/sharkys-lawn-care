@@ -6,7 +6,7 @@ export function ThumbDock() {
     <nav
       data-thumb-dock
       aria-label="Call, email, Instagram, Facebook"
-      className="fixed inset-x-0 bottom-0 z-50 border-t-4 border-ink bg-white text-ink pb-[env(safe-area-inset-bottom,0px)]"
+      className="fixed inset-x-0 bottom-0 z-50 border-t-4 border-ink bg-white text-ink pb-[env(safe-area-inset-bottom,0px)] md:hidden"
     >
       <div className="grid grid-cols-4">
         <a

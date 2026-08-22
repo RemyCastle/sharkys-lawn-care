@@ -33,6 +33,7 @@ export const site = {
 
 export const marks = {
   logoProfile: "/logo-profile.jpg",
+  logoMark: "/logo-mark.png",
   coverPolo: "/cover-polo.jpg",
   card: "/card.jpg",
 } as const
