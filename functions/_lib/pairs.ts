@@ -1,3 +1,7 @@
+export function photoIsPublic(photo: { src?: string | null }) {
+  return Boolean(String(photo.src || "").trim())
+}
+
 export function pairIsComplete(pair: {
   before_src?: string | null
   after_src?: string | null

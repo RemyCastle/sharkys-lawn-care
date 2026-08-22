@@ -364,7 +364,82 @@ function RequestsTab({ onNote }: { onNote: (n: string) => void }) {
   )
 }
 
-function PairsBlock({ onNote }: { onNote: (n: string) => void }) {
+function JobTypeFields({
+  services,
+  value,
+  onChange,
+  onBlur,
+}: {
+  services: LiveService[]
+  value?: string
+  onChange?: (caption: string) => void
+  onBlur?: () => void
+}) {
+  const [caption, setCaption] = useState(value ?? "")
+  const [customOn, setCustomOn] = useState(
+    () => Boolean(value) && !services.some((service) => service.name === value),
+  )
+  useEffect(() => {
+    if (value === undefined) return
+    setCaption(value)
+    setCustomOn(Boolean(value) && !services.some((service) => service.name === value))
+  }, [value, services])
+  function emit(next: string) {
+    setCaption(next)
+    onChange?.(next)
+  }
+  return (
+    <div className="flex flex-col gap-2">
+      <label className="flex flex-col gap-1 text-sm font-extrabold uppercase">
+        Job type
+        <select
+          className="field-ink"
+          value={customOn ? "__custom" : caption}
+          required={!customOn}
+          onChange={(event) => {
+            if (event.target.value === "__custom") {
+              setCustomOn(true)
+              emit("")
+              return
+            }
+            setCustomOn(false)
+            emit(event.target.value)
+          }}
+          onBlur={onBlur}
+        >
+          <option value="">Pick a job</option>
+          {services.map((service) => (
+            <option key={service.slug || service.name} value={service.name}>
+              {service.name}
+            </option>
+          ))}
+          <option value="__custom">Other</option>
+        </select>
+      </label>
+      {customOn ? (
+        <input
+          name="caption"
+          className="field-ink"
+          required
+          placeholder="Job title"
+          value={caption}
+          onChange={(event) => emit(event.target.value)}
+          onBlur={onBlur}
+        />
+      ) : (
+        <input type="hidden" name="caption" value={caption} />
+      )}
+    </div>
+  )
+}
+
+function PairsBlock({
+  onNote,
+  services,
+}: {
+  onNote: (n: string) => void
+  services: LiveService[]
+}) {
   const [pairs, setPairs] = useState<LivePair[]>([])
   const load = useCallback(() => {
     api<{ pairs: LivePair[] }>("/api/admin/pairs")
@@ -427,7 +502,7 @@ function PairsBlock({ onNote }: { onNote: (n: string) => void }) {
           After
           <input name="after" type="file" accept="image/*" required className="field-ink py-2" />
         </label>
-        <input name="caption" className="field-ink" placeholder="Caption, optional" />
+        <JobTypeFields services={services} />
         <label className="flex items-center gap-2 font-extrabold">
           <input name="visible" type="checkbox" value="1" className="size-5 accent-hot" />
           Show on Work
@@ -471,16 +546,16 @@ function PairsBlock({ onNote }: { onNote: (n: string) => void }) {
               {!complete ? (
                 <p className="font-extrabold">Hidden on Work — this pair is missing a photo.</p>
               ) : null}
-              <input
-                className="field-ink"
+              <JobTypeFields
+                services={services}
                 value={pair.caption}
-                placeholder="Caption"
-                onChange={(event) => {
+                onChange={(caption) => {
                   const next = [...pairs]
-                  next[index] = { ...pair, caption: event.target.value }
+                  next[index] = { ...pair, caption }
                   setPairs(next)
                 }}
                 onBlur={async () => {
+                  if (!pair.caption.trim()) return
                   await api("/api/admin/pairs", {
                     method: "PATCH",
                     headers: { "content-type": "application/json" },
@@ -558,9 +633,16 @@ function PairsBlock({ onNote }: { onNote: (n: string) => void }) {
 
 function PhotosTab({ onNote }: { onNote: (n: string) => void }) {
   const [photos, setPhotos] = useState<LivePhoto[]>([])
+  const [services, setServices] = useState<LiveService[]>([])
   const load = useCallback(() => {
-    api<{ photos: LivePhoto[] }>("/api/admin/photos")
-      .then((data) => setPhotos(data.photos))
+    Promise.all([
+      api<{ photos: LivePhoto[] }>("/api/admin/photos"),
+      api<{ services: LiveService[] }>("/api/admin/site"),
+    ])
+      .then(([photoData, siteData]) => {
+        setPhotos(photoData.photos)
+        setServices(siteData.services || [])
+      })
       .catch((err) => onNote(err.message))
   }, [onNote])
   useEffect(() => {
@@ -576,8 +658,11 @@ function PhotosTab({ onNote }: { onNote: (n: string) => void }) {
   }
   return (
     <div className="mt-6 flex max-w-xl flex-col gap-4">
-      <PairsBlock onNote={onNote} />
+      <PairsBlock onNote={onNote} services={services} />
       <h2 className="mt-4 text-4xl">Work stills</h2>
+      <p className="font-semibold">
+        Pick the job type. No photo means it stays off Work. Do not invent a title.
+      </p>
       <form
         className="vinyl flex flex-col gap-3 p-4"
         onSubmit={async (event) => {
@@ -585,39 +670,43 @@ function PhotosTab({ onNote }: { onNote: (n: string) => void }) {
           const form = event.currentTarget
           const data = new FormData(form)
           try {
-            await api("/api/admin/photos", { method: "POST", body: data })
+            const created = await api<{ src: string }>("/api/admin/photos", { method: "POST", body: data })
             form.reset()
-            onNote("Photo added.")
+            onNote(created.src ? "Photo added." : "Saved. Hidden on Work until you add a photo.")
             load()
           } catch (err) {
             onNote(err instanceof Error ? err.message : "Upload failed")
           }
         }}
       >
+        <JobTypeFields services={services} />
         <label className="flex flex-col gap-1 text-sm font-extrabold uppercase">
-          Add photo
-          <input name="file" type="file" accept="image/*" required className="field-ink py-2" />
+          Photo
+          <input name="file" type="file" accept="image/*" className="field-ink py-2" />
         </label>
-        <input name="caption" className="field-ink" placeholder="Caption" />
         <button type="submit" className="cta cta-call w-fit" style={{ minHeight: "44px" }}>
-          Upload
+          Save still
         </button>
       </form>
       {photos.map((photo, index) => (
         <figure key={photo.id ?? photo.src} className="vinyl overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={photo.src} alt={photo.alt} className="h-auto w-full" />
+          {photo.src ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={photo.src} alt={photo.alt || photo.caption} className="h-auto w-full" />
+          ) : (
+            <p className="p-3 font-extrabold">Hidden on Work — no photo yet.</p>
+          )}
           <figcaption className="flex flex-col gap-2 border-t-4 border-ink p-3">
-            <input
-              className="field-ink"
+            <JobTypeFields
+              services={services}
               value={photo.caption}
-              onChange={(e) => {
+              onChange={(caption) => {
                 const next = [...photos]
-                next[index] = { ...photo, caption: e.target.value, alt: e.target.value }
+                next[index] = { ...photo, caption, alt: caption }
                 setPhotos(next)
               }}
               onBlur={async () => {
-                if (!photo.id) return
+                if (!photo.id || !photo.caption.trim()) return
                 await api("/api/admin/photos", {
                   method: "PATCH",
                   headers: { "content-type": "application/json" },
@@ -625,6 +714,28 @@ function PhotosTab({ onNote }: { onNote: (n: string) => void }) {
                 })
               }}
             />
+            {!photo.src && photo.id ? (
+              <form
+                className="flex flex-col gap-2"
+                onSubmit={async (event) => {
+                  event.preventDefault()
+                  const data = new FormData(event.currentTarget)
+                  data.set("id", String(photo.id))
+                  try {
+                    await api("/api/admin/photos", { method: "POST", body: data })
+                    onNote("Photo added.")
+                    load()
+                  } catch (err) {
+                    onNote(err instanceof Error ? err.message : "Upload failed")
+                  }
+                }}
+              >
+                <input name="file" type="file" accept="image/*" required className="field-ink py-2" />
+                <button type="submit" className="admin-mini">
+                  Add photo
+                </button>
+              </form>
+            ) : null}
             <div className="flex flex-wrap gap-2">
               <button type="button" className="admin-mini" onClick={() => {
                 if (index === 0) return

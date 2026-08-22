@@ -40,6 +40,7 @@ export async function onRequestPost({ request, env }: { request: Request; env: E
   const after = form.get("after")
   const caption = String(form.get("caption") || "").trim()
   const wantVisible = form.get("visible") === "1" || form.get("visible") === "on"
+  if (!caption) return json({ error: "Pick a job type." }, 400)
   if (!(before instanceof File) || !before.size) {
     return json({ error: "Add a real Before photo." }, 400)
   }
@@ -108,6 +109,9 @@ export async function onRequestPatch({ request, env }: { request: Request; env: 
   ).first<PairRow>()
   if (!row) return json({ error: "Missing pair." }, 404)
   const caption = body.caption !== undefined ? String(body.caption).trim() : row.caption
+  if (body.caption !== undefined && !caption) {
+    return json({ error: "Pick a job type." }, 400)
+  }
   let visible = row.visible
   if (body.visible !== undefined) {
     const on = body.visible === true || body.visible === 1

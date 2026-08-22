@@ -7,6 +7,7 @@ import {
   fallbackPhotos,
   fallbackServices,
   fallbackSite,
+  photoIsPublic,
   type LivePhoto,
   type LiveService,
   type LiveSite,
@@ -67,8 +68,8 @@ export function LivePublicProvider({ children }: { children: React.ReactNode }) 
           services: Array.isArray(siteRes?.services) && siteRes.services.length
             ? siteRes.services
             : fallbackServices,
-          photos: Array.isArray(photoRes?.photos) && photoRes.photos.length
-            ? photoRes.photos
+          photos: Array.isArray(photoRes?.photos) && photoRes.photos.filter(photoIsPublic).length
+            ? photoRes.photos.filter(photoIsPublic)
             : fallbackPhotos,
           // Empty is correct. Never invent a pair if the API is down.
           pairs: Array.isArray(pairRes?.pairs) ? pairRes.pairs.filter(pairIsPublic) : fallbackPairs,

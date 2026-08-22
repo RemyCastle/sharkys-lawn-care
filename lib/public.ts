@@ -57,6 +57,10 @@ export const fallbackPhotos: LivePhoto[] = jobPhotos.map((row) => ({
   height: row.height,
 }))
 
+export function photoIsPublic(photo: { src?: string | null }) {
+  return Boolean(String(photo.src || "").trim())
+}
+
 export function phoneTel(display: string) {
   const digits = display.replace(/\D/g, "")
   if (digits.length === 10) return `tel:+1${digits}`
