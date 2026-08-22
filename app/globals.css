@@ -3,17 +3,18 @@
 @import "shadcn/tailwind.css";
 
 @theme inline {
-  --color-background: #f4f5f3;
+  --color-background: #ffffff;
   --color-foreground: #0b0f0c;
-  --color-ground: #f4f5f3;
+  --color-ground: #ffffff;
   --color-ink: #0b0f0c;
   --color-hot: #3f8c10;
+  --color-deep: #2e590f;
   --color-steel: #36414c;
   --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-teko), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-teko), ui-sans-serif, system-ui, sans-serif;
   --color-primary: #3f8c10;
-  --color-primary-foreground: #f4f5f3;
+  --color-primary-foreground: #ffffff;
   --color-border: #0b0f0c;
   --color-input: #0b0f0c;
   --color-ring: #3f8c10;
@@ -23,10 +24,10 @@
 }
 
 :root {
-  --background: #f4f5f3;
+  --background: #ffffff;
   --foreground: #0b0f0c;
   --primary: #3f8c10;
-  --primary-foreground: #f4f5f3;
+  --primary-foreground: #ffffff;
   --border: #0b0f0c;
   --input: #0b0f0c;
   --ring: #3f8c10;
@@ -37,12 +38,12 @@
   html {
     scroll-behavior: smooth;
     font-family: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
-    background: #f4f5f3;
+    background: #ffffff;
     color: #0b0f0c;
   }
 
   body {
-    background: #f4f5f3;
+    background: #ffffff;
     color: #0b0f0c;
   }
 
@@ -85,11 +86,11 @@
 
 .cta-call {
   background: #3f8c10;
-  color: #f4f5f3;
+  color: #ffffff;
 }
 
 .cta-mail {
-  background: #f4f5f3;
+  background: #ffffff;
   color: #0b0f0c;
 }
 

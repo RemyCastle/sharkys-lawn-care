@@ -20,18 +20,15 @@ export default function HomePage() {
           </div>
           <div className="mt-8 flex flex-col gap-4">
             <h1 className="text-5xl text-ink sm:text-6xl md:text-7xl">
-              Eugene and Springfield lawns.
-              <br />
-              We cut them.
+              {site.heroTitle}
             </h1>
             <p className="max-w-lg text-xl font-medium">{site.heroLead}</p>
-            <p className="text-lg font-extrabold">{site.tagline}</p>
             <div className="flex flex-col gap-3 sm:max-w-sm">
               <a href={site.phoneTel} className="cta cta-call">
-                Call {site.phoneDisplay}
+                {site.ctaPrimary}
               </a>
               <a href="#quote" className="cta cta-mail">
-                Email the job
+                {site.ctaSecondary}
               </a>
             </div>
           </div>
@@ -41,7 +38,6 @@ export default function HomePage() {
       <section className="border-b-4 border-ink bg-ground">
         <div className="mx-auto max-w-5xl px-4 py-12">
           <h2 className="text-5xl">Services</h2>
-          <p className="mt-3 text-lg font-medium">{site.workNote}</p>
           <ul className="mt-8 max-w-xl list-disc space-y-2 pl-5 text-xl font-medium">
             {services.map((service) => (
               <li key={service.slug}>

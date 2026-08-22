@@ -32,7 +32,7 @@ export default function WorkPage() {
           ))}
         </div>
         <a href={site.phoneTel} className="cta cta-call mt-10">
-          Call {site.phoneDisplay}
+          {site.ctaPrimary}
         </a>
       </div>
     </div>

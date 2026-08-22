@@ -17,14 +17,14 @@ export const site = {
     "https://www.facebook.com/people/Sharkys-Lawn-Care-LLC/61590475589390/",
   instagram: "https://www.instagram.com/sharkyslawnmowingservice/",
   instagramHandle: "@sharkyslawnmowingservice",
-  tagline: "Reliable. Professional. Affordable.",
-  heroKicker: "Sharky's Lawn Care LLC",
-  heroTitle: "Eugene and Springfield lawns. We cut them.",
+  heroTitle: "Springfield lawns. We cut them.",
   heroLead:
-    "Mow, edge, trim, blow. Then the jobs that wait: mulch, blackberries, thatch, cleanup, pressure wash.",
-  workNote: "Houses and businesses. Eugene, Springfield, and around here.",
+    "Mow, edge, trim, blow. Then the jobs that wait: mulch, blackberries, thatch, cleanup, pressure wash. Eugene and Springfield, and around here.",
+  ctaPrimary: "Call (541) 579-0726",
+  ctaSecondary: "Email us",
   about:
-    "Jonathan Lopez. Locally owned. Insured and bonded. 10+ years. Free estimates.",
+    "Jonathan Lopez. Local, insured and bonded. Ten years on lawns. Call if you want a number.",
+  quoteHeading: "Email the job",
   quoteHelper: "Or call (541) 579-0726.",
 } as const
 

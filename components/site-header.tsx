@@ -24,7 +24,7 @@ export function SiteHeader() {
             </Link>
           ))}
           <a href="#quote" className="hover:text-hot">
-            Email the job
+            {site.ctaSecondary}
           </a>
         </nav>
         <a href={site.phoneTel} className="cta cta-call" style={{ minHeight: "2.75rem", fontSize: "1.25rem" }}>

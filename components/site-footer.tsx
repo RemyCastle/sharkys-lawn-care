@@ -6,7 +6,7 @@ import { site } from "@/lib/site"
 
 export function SiteFooter() {
   return (
-    <footer className="border-t-4 border-ink bg-ink text-ground">
+    <footer className="border-t-4 border-ink bg-white text-ink">
       <div className="mx-auto flex max-w-5xl flex-col gap-5 px-4 py-10">
         <BrandMark className="h-20 bg-white" />
         <p className="max-w-2xl text-base font-semibold leading-relaxed">
@@ -34,7 +34,7 @@ export function SiteFooter() {
             Work
           </Link>
           <a href="#quote" className="hover:text-hot">
-            Email the job
+            {site.ctaSecondary}
           </a>
         </div>
       </div>

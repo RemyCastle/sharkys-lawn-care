@@ -85,14 +85,13 @@ export function QuoteForm({ jobPrefill = "" }: { jobPrefill?: string }) {
         />
       </label>
       <label className="flex flex-col gap-1 text-sm font-extrabold uppercase tracking-wide">
-        Street
+        Optional street
         <input
           id="quote-street"
           name="street"
           autoComplete="street-address"
           value={street}
           onChange={(event) => setStreet(event.target.value)}
-          placeholder="Customer's, for the crew"
           className="field-ink"
         />
       </label>
