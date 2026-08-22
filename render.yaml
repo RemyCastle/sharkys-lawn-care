@@ -1,0 +1,6 @@
+services:
+  - type: web
+    runtime: static
+    name: sharkys-lawn-care
+    buildCommand: npm ci && npm run build
+    staticPublishPath: out
