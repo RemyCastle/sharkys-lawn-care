@@ -1,14 +1,14 @@
 # Sharky's Lawn Care
 
 Marketing site for **Sharky's Lawn Care LLC** in Springfield, Oregon.
-Static export. No CMS. No admin. No fake backend.
+Static export. No CMS. No admin. No backend.
 
-Printed domain: [sharkyslawncare.com](https://sharkyslawncare.com)
+Printed domain: [sharkyslawncare.com](https://sharkyslawncare.com) — add it on Cloudflare Pages when DNS exists. Do not invent DNS.
 
 ## Stack
 
 - Next.js App Router (`output: 'export'`)
-- TypeScript, Tailwind, shadcn/ui, Motion
+- TypeScript, Tailwind
 - Publish folder: `out/`
 
 ## Local
@@ -21,41 +21,45 @@ npm run build
 
 Open the build with any static server on `out/`.
 
-## Deploy on Render (Static Site)
+## Deploy on Cloudflare Pages (free)
 
-Do **not** create a Web Service. Free web services sleep. This build is files only.
+This is the handoff host. Not Render.
 
-1. New → Static Site
-2. Connect this GitHub repo
+1. Cloudflare Dashboard → Workers & Pages → Create → Pages → Connect to Git
+2. Repo: `RemyCastle/sharkys-lawn-care`
 3. Build command: `npm ci && npm run build`
-4. Publish directory: `out`
-5. Add the custom domain `sharkyslawncare.com` when DNS is ready
+4. Build output directory: `out`
+5. Framework preset: None / static. Next already writes `out/`.
+6. After the first deploy you get a `*.pages.dev` URL.
+7. Custom domain `sharkyslawncare.com` later, when DNS exists.
 
-`render.yaml` in the repo describes the same Static Site (`runtime: static`, `staticPublishPath: out`).
+Direct upload after a local build:
+
+```bash
+npm ci && npm run build
+npx wrangler pages deploy out --project-name=sharkys-lawn-care
+```
+
+`wrangler.jsonc` sets `pages_build_output_dir` to `./out`.
+
+The quote form POSTs from the page to FormSubmit. Pages can do that. No server on the host.
 
 ## Contact on the site
-
-Only facts from the business card and Facebook:
 
 - Primary CTA: Call [(541) 579-0726](tel:+15415790726)
 - Email [sharkyslawncare.541@gmail.com](mailto:sharkyslawncare.541@gmail.com)
 - Facebook: [Sharky's Lawn Care LLC](https://www.facebook.com/people/Sharkys-Lawn-Care-LLC/61590475589390/)
 - Instagram: [@sharkyslawnmowingservice](https://www.instagram.com/sharkyslawnmowingservice/)
-- Owner: Jonathan Lopez (from the card; not listed on Facebook)
-- Address on Facebook: 5172 A St, Springfield, OR 97478 (no suite)
+- Owner: Jonathan Lopez
+- Address: 5172 A St, Springfield, OR 97478
 - Area: Eugene / Springfield, OR
-- Domain on the card: sharkyslawncare.com (not listed on Facebook)
 
-No hours (none public). No star scores. No Google URL. No Sparky's. The quote sheet is mailto. One real job photo on the site; more live on Facebook.
+No hours. No star scores. No Google URL. No Sparky's.
 
 ## Look
 
-Sport card. Hard midday sun. Four colors only: ground `#F4F5F3`, ink `#0B0F0C`, hot `#3F8C10`, steel `#36414C`. Type: Teko + Barlow.
+White ground like the polo mark. Ink `#0B0F0C`. Lime `#3F8C10` / `#2E590F`. Steel `#36414C`. Teko + Barlow.
 
-Art (two official rasters only — no third shark, no 3D, no rider logo):
-
-- `public/logo-profile.jpg` — polo-shark mark. Header, footer, and hero picture.
-- `public/cover-polo.jpg` — Facebook cover on the home page.
-- `public/work/pressure-wash-siding.jpg` — real pressure-wash job in a simple grid.
-
-Look is a printed sport card on ground `#F4F5F3`. Primary CTA is Call. Secondary is Email the job. Quote is in-page `#quote`. Dock: Call, Email, IG, Facebook.
+- `public/logo-profile.jpg` — polo-shark mark in the header
+- `public/cover-polo.jpg` — printed card on the home page
+- `public/work/pressure-wash-siding.jpg` — real job photo
