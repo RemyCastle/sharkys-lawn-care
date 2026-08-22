@@ -109,8 +109,8 @@ export function QuoteForm() {
         </a>
       </div>
       <p className="text-sm text-steel">
-        Opens your mail app. Writes to {site.email}. No form backend. Call if
-        you want it faster.
+        Opens your mail app. Writes to {site.email}. No form backend. Facebook
+        is faster if you want a back-and-forth.
       </p>
     </form>
   )
