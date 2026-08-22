@@ -14,7 +14,7 @@ export default function WorkPage() {
     <div className="bg-ground">
       <div className="mx-auto max-w-5xl px-4 py-12">
         <h1 className="text-6xl">Work</h1>
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
+        <div className="mt-8 grid items-start gap-4 md:grid-cols-2">
           {jobPhotos.map((photo) => (
             <figure key={photo.src} className="vinyl overflow-hidden">
               <Image
@@ -22,7 +22,7 @@ export default function WorkPage() {
                 alt={photo.alt}
                 width={photo.width}
                 height={photo.height}
-                className="w-full object-cover"
+                className="h-auto w-full"
                 unoptimized
                 priority
               />

@@ -49,7 +49,7 @@ export default function HomePage() {
       <section className="border-b-4 border-ink bg-white">
         <div className="mx-auto max-w-5xl px-4 py-12">
           <h2 className="text-5xl">Work</h2>
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
+          <div className="mt-8 grid items-start gap-4 md:grid-cols-2">
             {jobPhotos.map((photo) => (
               <figure key={photo.src} className="vinyl overflow-hidden">
                 <Image
@@ -57,7 +57,7 @@ export default function HomePage() {
                   alt={photo.alt}
                   width={photo.width}
                   height={photo.height}
-                  className="w-full object-cover"
+                  className="h-auto w-full"
                   unoptimized
                 />
                 <figcaption className="border-t-4 border-ink px-3 py-2 font-display text-2xl uppercase">
