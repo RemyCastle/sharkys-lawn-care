@@ -2,7 +2,6 @@
 
 import Image from "next/image"
 
-import { ReviewLink } from "@/components/review-link"
 import { useLive } from "@/components/live-public"
 import { marks } from "@/lib/site"
 import { phoneTel } from "@/lib/public"
@@ -29,12 +28,9 @@ export function ServicesView() {
             <li key={service.slug}>{service.name}</li>
           ))}
         </ul>
-        <div className="mt-10 flex max-w-sm flex-col gap-3">
-          <a href={phoneTel(site.phone_display)} className="cta cta-call">
-            {site.cta_primary}
-          </a>
-          <ReviewLink />
-        </div>
+        <a href={phoneTel(site.phone_display)} className="cta cta-call mt-10">
+          {site.cta_primary}
+        </a>
       </div>
     </div>
   )

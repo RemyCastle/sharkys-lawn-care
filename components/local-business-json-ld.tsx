@@ -22,7 +22,7 @@ export function LocalBusinessJsonLd() {
       { "@type": "City", name: "Eugene" },
       { "@type": "City", name: "Springfield" },
     ],
-    sameAs: [site.facebook, site.instagram, site.googleMaps],
+    sameAs: [site.facebook, site.instagram],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Services",

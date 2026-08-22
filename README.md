@@ -56,11 +56,10 @@ Do not create another Pages project. Do not invent DNS. Not Render.
 - Email [sharkyslawncare.541@gmail.com](mailto:sharkyslawncare.541@gmail.com)
 - Facebook: [Sharky's Lawn Care LLC](https://www.facebook.com/people/Sharkys-Lawn-Care-LLC/61590475589390/)
 - Instagram: [@sharkyslawnmowingservice](https://www.instagram.com/sharkyslawnmowingservice/)
-- Review us: [Google](https://www.google.com/maps/search/?api=1&query=Sharky%27s%20Lawn%20Care%20LLC%20541-579-0726%20Eugene%20OR) — Sharky's Lawn Care LLC, not Sparky's
 - Owner: Jonathan Lopez
 - Area: Eugene and Springfield area
 
-Street is optional on quote requests only. No street on the public site. No hours. No star scores. No Sparky's.
+Street is optional on quote requests only. No street on the public site. No hours. No star scores. No Google review URL until Jonathan’s official Get more reviews link. No Sparky's.
 
 ## Look
 
