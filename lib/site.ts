@@ -23,8 +23,9 @@ export const site = {
   ctaPrimary: "Call (541) 579-0726",
   ctaSecondary: "Email us",
   about:
-    "Jonathan Lopez. Local, insured and bonded. Ten years on lawns. Call if you want a number.",
+    "Jonathan Lopez owns it. Insured and bonded. More than ten years on lawns. Estimates are free.",
   quoteHeading: "Email the job",
+  quoteSubmit: "Send",
   quoteHelper: "Or call (541) 579-0726.",
 } as const
 

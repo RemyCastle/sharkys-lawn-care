@@ -96,7 +96,7 @@ export function QuoteForm({ jobPrefill = "" }: { jobPrefill?: string }) {
         />
       </label>
       <button type="submit" className="cta cta-mail w-fit">
-        Email the job
+        {site.quoteSubmit}
       </button>
       <p className="text-sm font-semibold text-steel">{site.quoteHelper}</p>
     </form>
