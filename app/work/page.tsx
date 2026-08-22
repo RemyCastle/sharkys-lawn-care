@@ -1,9 +1,10 @@
 import type { Metadata } from "next"
-import Image from "next/image"
 
+import { BeforeAfter } from "@/components/before-after"
+import { QuoteLink } from "@/components/quote-link"
 import { SectionHead } from "@/components/section-head"
 import { buttonVariants } from "@/components/ui/button"
-import { services, site } from "@/lib/site"
+import { jobPhoto, services, site } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
@@ -19,25 +20,18 @@ export default function WorkPage() {
         <SectionHead
           kicker="Yards"
           title="Work"
-          note="One job photo on this site. More live on Facebook."
+          note="One job photo. Slide before and after. Tap the photo to get a time."
         />
-        <figure className="sport-card overflow-hidden">
-          <Image
-            src="/work/pressure-wash-siding.jpg"
-            alt="Pressure-wash job: house siding after a wash"
-            width={720}
-            height={540}
-            className="w-full object-cover"
-            unoptimized
-            priority
-          />
-          <figcaption className="border-t-4 border-ink px-4 py-3">
-            <p className="font-display text-3xl uppercase">Pressure wash</p>
-            <p className="text-sm font-semibold text-steel">
-              A pressure-wash job. Their photo.
-            </p>
-          </figcaption>
-        </figure>
+        <BeforeAfter />
+        <QuoteLink
+          job={jobPhoto.job}
+          className={cn(
+            buttonVariants({ variant: "default" }),
+            "inline-flex h-12 w-fit rounded-sm px-5 text-base font-extrabold"
+          )}
+        >
+          Get a time
+        </QuoteLink>
         <div className="sport-card-steel p-6">
           <p className="font-display text-4xl uppercase">More shots</p>
           <p className="mt-2 max-w-xl text-ground/90">
@@ -55,7 +49,6 @@ export default function WorkPage() {
             </a>
             <a
               href={site.facebook}
-              target="_blank"
               rel="noreferrer"
               className={cn(
                 buttonVariants({ variant: "outline" }),
@@ -66,7 +59,6 @@ export default function WorkPage() {
             </a>
             <a
               href={site.instagram}
-              target="_blank"
               rel="noreferrer"
               className={cn(
                 buttonVariants({ variant: "outline" }),

@@ -25,6 +25,14 @@ export const site = {
     "Mow, edge, trim, blow. Then the jobs that wait: mulch, blackberries, thatch, cleanup, pressure wash. Eugene and Springfield.",
 } as const
 
+export const jobPhoto = {
+  src: "/work/pressure-wash-siding.jpg",
+  alt: "Pressure-wash job: house siding, part washed, part still oxidized",
+  job: "Pressure wash",
+  width: 720,
+  height: 540,
+} as const
+
 export const facts = [
   "Free estimates",
   "Insured & bonded",

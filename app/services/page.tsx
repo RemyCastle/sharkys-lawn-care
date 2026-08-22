@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 
+import { QuoteLink } from "@/components/quote-link"
 import { SectionHead } from "@/components/section-head"
 import { buttonVariants } from "@/components/ui/button"
 import { services, site } from "@/lib/site"
@@ -35,15 +36,25 @@ export default function ServicesPage() {
             </article>
           ))}
         </div>
-        <a
-          href={site.phoneTel}
-          className={cn(
-            buttonVariants({ variant: "default" }),
-            "h-14 w-fit rounded-sm px-5 text-lg font-extrabold"
-          )}
-        >
-          Call {site.phoneDisplay}
-        </a>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <a
+            href={site.phoneTel}
+            className={cn(
+              buttonVariants({ variant: "default" }),
+              "h-14 w-fit rounded-sm px-5 text-lg font-extrabold"
+            )}
+          >
+            Call {site.phoneDisplay}
+          </a>
+          <QuoteLink
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "h-14 w-fit rounded-sm border-2 px-5 text-lg font-extrabold"
+            )}
+          >
+            Get a time
+          </QuoteLink>
+        </div>
       </div>
     </div>
   )

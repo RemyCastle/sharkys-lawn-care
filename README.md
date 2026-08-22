@@ -53,5 +53,7 @@ Sport card. Hard midday sun. Four colors only: ground `#F4F5F3`, ink `#0B0F0C`, 
 Art:
 
 - `public/mark.svg` — original SVG mark (polo shark, walk-behind). Cover used as brand reference only.
-- `public/cover-polo.jpg` — local copy of their cover for the hero banner. Not a Facebook hotlink.
-- `public/work/pressure-wash-siding.jpg` — real pressure-wash job from their Facebook.
+- `public/cover-polo.jpg` — local copy of their cover. Brand reference only. Not the hero.
+- `public/work/pressure-wash-siding.jpg` — real pressure-wash job. This is the hero and the before/after swipe.
+
+Quote is an in-page `#quote` sheet (name, phone, town, job). No Typeform. Submit is mailto. Sticky thumb dock: Call, Email, Facebook.

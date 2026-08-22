@@ -186,6 +186,85 @@
   }
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .desk-lift {
+    transition: transform 0.16s ease;
+  }
+
+  .desk-lift:hover {
+    transform: translate(-3px, -3px);
+  }
+}
+
+.quote-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.quote-sheet:target,
+.quote-sheet[data-open="true"],
+html[data-quote-open] .quote-sheet {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.quote-scrim {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgb(11 15 12 / 0.72);
+}
+
+.quote-panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 36rem);
+  max-height: 92dvh;
+  overflow: hidden;
+  background: #f4f5f3;
+  transform: translateY(100%);
+}
+
+.quote-sheet:target .quote-panel,
+.quote-sheet[data-open="true"] .quote-panel,
+html[data-quote-open] .quote-sheet .quote-panel {
+  transform: none;
+}
+
+@media (min-width: 768px) {
+  .quote-sheet {
+    align-items: center;
+    padding: 1.5rem;
+  }
+
+  .quote-panel {
+    transform: none;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .quote-panel {
+    transition: transform 0.18s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desk-lift,
+  .desk-lift:hover,
+  .quote-panel,
+  .quote-sheet:target .quote-panel,
+  .quote-sheet[data-open="true"] .quote-panel {
+    transition: none;
+    transform: none;
+  }
+}
+
 @keyframes ticker-move {
   from {
     transform: translateX(0);

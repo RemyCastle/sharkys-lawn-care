@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Phone } from "lucide-react"
 
+import { QuoteLink } from "@/components/quote-link"
 import { buttonVariants } from "@/components/ui/button"
 import { site } from "@/lib/site"
 import { cn } from "@/lib/utils"
@@ -42,6 +43,7 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
+          <QuoteLink className="text-hot">Get a time</QuoteLink>
         </nav>
         <a
           href={site.phoneTel}
@@ -61,9 +63,7 @@ export function SiteHeader() {
             {item.label}
           </Link>
         ))}
-        <Link href="/#quote" className="text-hot">
-          Quote
-        </Link>
+        <QuoteLink className="text-hot">Get a time</QuoteLink>
       </nav>
     </header>
   )

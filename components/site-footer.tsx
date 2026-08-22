@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
+import { QuoteLink } from "@/components/quote-link"
 import { site } from "@/lib/site"
 
 export function SiteFooter() {
@@ -47,6 +48,7 @@ export function SiteFooter() {
           <Link href="/work/" className="hover:text-hot">
             Work
           </Link>
+          <QuoteLink className="hover:text-hot">Get a time</QuoteLink>
         </div>
         <p className="text-sm text-ground/70">{site.domain}</p>
       </div>

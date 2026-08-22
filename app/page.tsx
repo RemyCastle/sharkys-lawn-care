@@ -2,78 +2,82 @@ import Image from "next/image"
 import Link from "next/link"
 import { Mail, Phone } from "lucide-react"
 
-import { HeroCard } from "@/components/hero-card"
-import { QuoteForm } from "@/components/quote-form"
+import { BeforeAfter } from "@/components/before-after"
+import { QuoteLink } from "@/components/quote-link"
 import { SectionHead } from "@/components/section-head"
 import { buttonVariants } from "@/components/ui/button"
-import { facts, services, site } from "@/lib/site"
+import { facts, jobPhoto, services, site } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
 export default function HomePage() {
   return (
     <div>
-      <section className="sun-field border-b-4 border-ink">
-        <div className="border-b-4 border-ink bg-white">
-          <div className="mx-auto max-w-6xl">
-            <Image
-              src="/cover-polo.jpg"
-              alt="Sharky's Lawn Care cover: polo shark, walk-behind mower, and the service list"
-              width={960}
-              height={400}
-              className="w-full object-cover"
-              unoptimized
-              priority
-            />
-          </div>
-        </div>
-        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-10 md:grid-cols-[1.1fr_0.9fr] md:py-14">
-          <div className="flex flex-col gap-5">
-            <p className="text-sm font-extrabold uppercase tracking-[0.22em] text-steel">
-              {site.heroKicker}
-            </p>
-            <h1 className="text-5xl text-ink sm:text-6xl md:text-7xl">
-              Springfield lawns.
-              <br />
-              We cut them.
-            </h1>
-            <p className="max-w-lg text-xl font-medium text-ink">{site.heroLead}</p>
-            <p className="text-lg font-extrabold">{site.tagline}</p>
-            <div className="flex flex-col gap-3">
-              <a
-                href={site.phoneTel}
-                className={cn(
-                  buttonVariants({ variant: "default" }),
-                  "h-14 rounded-sm px-5 text-lg font-extrabold"
-                )}
-              >
-                <Phone data-icon="inline-start" />
-                Call {site.phoneDisplay}
-              </a>
-              <a
-                href={site.emailMailto}
-                className={cn(
-                  buttonVariants({ variant: "outline" }),
-                  "h-12 rounded-sm border-2 px-5 text-base font-extrabold"
-                )}
-              >
-                <Mail data-icon="inline-start" />
-                {site.email}
-              </a>
-              <a
-                href={site.facebook}
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm font-extrabold uppercase tracking-wider hover:text-hot"
-              >
-                Facebook message
-              </a>
+      <section className="relative border-b-4 border-ink">
+        <div className="relative flex min-h-[85svh] flex-col justify-end">
+          <Image
+            src={jobPhoto.src}
+            alt={jobPhoto.alt}
+            fill
+            priority
+            unoptimized
+            sizes="100vw"
+            className="object-cover object-[42%_center]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-transparent" />
+          <div className="relative z-10 px-4 pb-6 pt-28 text-ground">
+            <div className="mx-auto flex max-w-6xl flex-col gap-4">
+              <p className="text-sm font-extrabold uppercase tracking-[0.22em] text-ground/75">
+                {site.heroKicker}
+              </p>
+              <h1 className="text-5xl text-ground sm:text-6xl md:text-7xl">
+                Springfield lawns.
+                <br />
+                We cut them.
+              </h1>
+              <p className="max-w-lg text-lg font-medium sm:text-xl">{site.heroLead}</p>
+              <p className="text-lg font-extrabold">{site.tagline}</p>
+              <div className="flex flex-col gap-3 sm:max-w-md">
+                <a
+                  href={site.phoneTel}
+                  className={cn(
+                    buttonVariants({ variant: "default" }),
+                    "h-14 rounded-sm px-5 text-lg font-extrabold"
+                  )}
+                >
+                  <Phone data-icon="inline-start" />
+                  Call {site.phoneDisplay}
+                </a>
+                <a
+                  href={site.emailMailto}
+                  className={cn(
+                    buttonVariants({ variant: "outline" }),
+                    "h-12 rounded-sm border-2 border-ground bg-transparent px-5 text-base font-extrabold text-ground hover:bg-ground hover:text-ink"
+                  )}
+                >
+                  <Mail data-icon="inline-start" />
+                  {site.email}
+                </a>
+                <QuoteLink
+                  className={cn(
+                    buttonVariants({ variant: "outline" }),
+                    "h-12 rounded-sm border-2 border-ground bg-transparent px-5 text-base font-extrabold text-ground hover:bg-ground hover:text-ink"
+                  )}
+                >
+                  Get a time
+                </QuoteLink>
+                <a
+                  href={site.facebook}
+                  rel="noreferrer"
+                  className="text-sm font-extrabold uppercase tracking-wider text-ground/80 hover:text-ground"
+                >
+                  Facebook message
+                </a>
+              </div>
+              <p className="font-display text-2xl uppercase text-ground/80">
+                {site.owner}
+              </p>
             </div>
-            <p className="font-display text-2xl uppercase text-steel">
-              {site.owner}
-            </p>
           </div>
-
-          <HeroCard />
         </div>
       </section>
 
@@ -102,7 +106,7 @@ export default function HomePage() {
               <Link
                 key={service.slug}
                 href="/services/"
-                className="sport-card flex items-start gap-4 p-4 hover:bg-hot hover:text-ground"
+                className="desk-lift sport-card flex items-start gap-4 p-4"
               >
                 <span className="font-display text-4xl leading-none">
                   {String(index + 1).padStart(2, "0")}
@@ -127,36 +131,18 @@ export default function HomePage() {
             invert
             kicker="Yards"
             title="Work"
-            note="One job photo on this site. More live on Facebook."
+            note="One job photo. Slide before and after. Tap to book."
           />
-          <div className="sport-card overflow-hidden">
-            <Image
-              src="/work/pressure-wash-siding.jpg"
-              alt="Pressure-wash job: house siding after a wash"
-              width={720}
-              height={540}
-              className="w-full object-cover"
-              unoptimized
-            />
-            <div className="bg-ink px-4 py-3">
-              <p className="font-display text-3xl uppercase text-ground">
-                Pressure wash
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="quote" className="sun-field">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-2">
-          <SectionHead
-            kicker="Book it"
-            title="Get a time"
-            note="Name, phone, town, what you need. Or just call."
-          />
-          <div className="sport-card p-5">
-            <QuoteForm />
-          </div>
+          <BeforeAfter />
+          <QuoteLink
+            job={jobPhoto.job}
+            className={cn(
+              buttonVariants({ variant: "default" }),
+              "h-12 w-fit rounded-sm px-5 text-base font-extrabold"
+            )}
+          >
+            Get a time
+          </QuoteLink>
         </div>
       </section>
     </div>
