@@ -118,19 +118,26 @@
 
 .work-stream {
   display: flex;
-  gap: 1rem;
+  gap: 12px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scroll-padding-inline: 1rem;
+  scroll-padding-inline: 0;
   overscroll-behavior-x: contain;
+  touch-action: pan-x;
   -webkit-overflow-scrolling: touch;
   padding-bottom: 0.35rem;
 }
 
 .work-slide {
-  flex: 0 0 min(88%, 36rem);
+  flex: 0 0 calc(100% - 36px);
   scroll-snap-align: start;
   scroll-snap-stop: always;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-stream {
+    scroll-behavior: auto;
+  }
 }
 
 .work-dot {

@@ -4,9 +4,12 @@ import { useCallback, useEffect, useRef, useState } from "react"
 
 import { jobPhotos } from "@/lib/site"
 
+const DRAG_PX = 8
+
 export function WorkStream() {
   const scrollerRef = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
+  const pointer = useRef({ x: 0, dragging: false })
 
   const updateActive = useCallback(() => {
     const root = scrollerRef.current
@@ -34,14 +37,22 @@ export function WorkStream() {
     return () => root.removeEventListener("scroll", updateActive)
   }, [updateActive])
 
-  const goTo = (index: number) => {
+  const goTo = (index: number, instant = false) => {
     const root = scrollerRef.current
     const slide = root?.children[index] as HTMLElement | undefined
-    slide?.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" })
+    if (!slide) return
+    const reduce =
+      instant ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    slide.scrollIntoView({
+      behavior: reduce ? "auto" : "smooth",
+      inline: "start",
+      block: "nearest",
+    })
   }
 
   return (
-    <div className="mt-8">
+    <div id="work" className="mt-8">
       <div
         ref={scrollerRef}
         className="work-stream"
@@ -49,6 +60,14 @@ export function WorkStream() {
         aria-roledescription="carousel"
         aria-label="Job photos"
         tabIndex={0}
+        onPointerDown={(event) => {
+          pointer.current = { x: event.clientX, dragging: false }
+        }}
+        onPointerMove={(event) => {
+          if (Math.abs(event.clientX - pointer.current.x) >= DRAG_PX) {
+            pointer.current.dragging = true
+          }
+        }}
         onKeyDown={(event) => {
           if (event.key === "ArrowRight") {
             event.preventDefault()
@@ -71,6 +90,16 @@ export function WorkStream() {
               className="h-auto w-full"
               loading={index === 0 ? "eager" : "lazy"}
               decoding="async"
+              draggable={false}
+              onClick={() => {
+                if (pointer.current.dragging) return
+                document.getElementById("quote")?.scrollIntoView({
+                  behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+                    .matches
+                    ? "auto"
+                    : "smooth",
+                })
+              }}
             />
             <figcaption className="work-cap border-t-4 border-ink px-3 py-2 font-display text-2xl">
               {photo.caption}
@@ -78,7 +107,7 @@ export function WorkStream() {
           </figure>
         ))}
       </div>
-      <div className="mt-4 flex flex-wrap items-center gap-2" role="tablist" aria-label="Job photo dots">
+      <div className="mt-4 flex flex-wrap items-center gap-2" aria-label="Job photo dots">
         {jobPhotos.map((photo, index) => (
           <button
             key={photo.src}
