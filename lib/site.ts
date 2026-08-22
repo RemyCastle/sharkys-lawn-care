@@ -17,7 +17,6 @@ export const site = {
   instagram: "https://www.instagram.com/sharkyslawnmowingservice/",
   instagramHandle: "@sharkyslawnmowingservice",
   tagline: "Reliable. Professional. Affordable.",
-  taglineParts: ["Reliable", "Professional", "Affordable"] as const,
   years: "10+ years",
   yearsLine: "10+ years",
   heroKicker: "Sharky's Lawn Care",
