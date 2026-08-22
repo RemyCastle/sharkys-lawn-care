@@ -45,10 +45,24 @@ export const marks = {
 export const jobPhotos = [
   {
     src: "/work/pressure-wash-siding.jpg",
-    alt: "House siding after a pressure-wash job: left side still oxidized, right side cleaned, dirt bed in front",
+    alt: "House siding mid pressure-wash: left still oxidized, right cleaned, mulch bed in front",
     caption: "Pressure Wash",
     width: 720,
     height: 540,
+  },
+  {
+    src: "/work/ig-02.jpg",
+    alt: "Six job photos: mowed yards, a worker blowing, a pool-side lawn, and a side yard",
+    caption: "General Maintenance (Edging, Blowing, Trimming, Mowing)",
+    width: 361,
+    height: 640,
+  },
+  {
+    src: "/work/ig-03.jpg",
+    alt: "White work truck with an open tailgate and a worker in a neon vest on a front lawn",
+    caption: "Job site",
+    width: 360,
+    height: 640,
   },
 ] as const
 
