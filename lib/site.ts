@@ -22,7 +22,7 @@ export const site = {
     "https://www.facebook.com/people/Sharkys-Lawn-Care-LLC/61590475589390/",
   instagram: "https://www.instagram.com/sharkyslawnmowingservice/",
   instagramHandle: "@sharkyslawnmowingservice",
-  heroTitle: "Springfield lawns. We cut them.",
+  heroTitle: "All jobs, big or small, shoot us a message, we do them all.",
   heroLead:
     "Mow, edge, trim, blow. Mulch, blackberries, thatch, cleanup, pressure wash. Eugene and Springfield area.",
   ctaPrimary: "Call (541) 579-0726",
