@@ -41,6 +41,7 @@ export const marks = {
   coverPolo: "/cover-polo.jpg",
   card: "/card.jpg",
   cardHoodie: "/card-hoodie.jpg",
+  cardMark: "/card-mark.jpg",
 } as const
 
 export const jobPhotos = [

@@ -13,15 +13,15 @@ export function BrandMark({
   return (
     <span
       className={cn(
-        "relative block h-16 w-24 overflow-hidden bg-white",
+        "relative block h-16 w-16 overflow-hidden bg-white",
         className,
       )}
     >
       <Image
-        src={marks.card}
+        src={marks.cardMark}
         alt="Sharky's Lawn Care"
         fill
-        className="object-cover object-[64%_15%]"
+        className="object-contain"
         unoptimized
         priority={priority}
       />
