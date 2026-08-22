@@ -22,7 +22,8 @@ export function SiteFooter() {
           </p>
         </div>
         <p className="max-w-3xl text-base font-semibold leading-relaxed">
-          Sharky&apos;s Lawn Care LLC · {site.owner} · Eugene / Springfield, OR ·{" "}
+          Sharky&apos;s Lawn Care LLC · {site.owner} · {site.address} · Eugene /
+          Springfield, OR ·{" "}
           <a href={site.phoneTel} className="underline decoration-hot underline-offset-4">
             {site.phoneDisplay}
           </a>{" "}

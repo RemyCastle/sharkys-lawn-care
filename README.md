@@ -40,10 +40,12 @@ Only facts from the business card and Facebook:
 - Primary CTA: Call [(541) 579-0726](tel:+15415790726)
 - Email [sharkyslawncare.541@gmail.com](mailto:sharkyslawncare.541@gmail.com)
 - Facebook: [Sharky's Lawn Care LLC](https://www.facebook.com/people/Sharkys-Lawn-Care-LLC/61590475589390/)
-- Owner: Jonathan Lopez
+- Owner: Jonathan Lopez (from the card; not listed on Facebook)
+- Address on Facebook: 5172 A St, Springfield, OR 97478 (no suite)
 - Area: Eugene / Springfield, OR
+- Domain on the card: sharkyslawncare.com (not listed on Facebook)
 
-No shop street on the site. No Instagram. No Google URL. The quote sheet is mailto.
+No hours (none public). No star scores. No Instagram. No Google URL. No Sparky's. The quote sheet is mailto. One real job photo on the site; more live on Facebook.
 
 ## Look
 

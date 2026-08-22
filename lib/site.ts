@@ -5,6 +5,7 @@ export const site = {
   ownerTitle: "Owner",
   town: "Springfield, Oregon",
   townShort: "Springfield, OR",
+  address: "5172 A St, Springfield, OR 97478",
   serviceArea: "Eugene / Springfield, OR",
   phoneDisplay: "(541) 579-0726",
   phoneTel: "tel:+15415790726",
