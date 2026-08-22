@@ -5,9 +5,20 @@ import { jobPhotos, marks, services, site } from "@/lib/site"
 export default function HomePage() {
   return (
     <div className="bg-ground">
-      <section className="border-b-4 border-ink bg-white">
-        <div className="mx-auto grid max-w-5xl items-center gap-8 px-4 py-10 md:grid-cols-[1fr_0.9fr] md:py-14">
-          <div className="flex flex-col gap-4">
+      <section className="border-b-4 border-ink bg-ground">
+        <div className="mx-auto max-w-5xl px-4 py-6">
+          <div className="vinyl overflow-hidden bg-white">
+            <Image
+              src={marks.coverPolo}
+              alt="Sharky's Lawn Care printed card: polo shark, walk-behind mower, and the service list"
+              width={960}
+              height={400}
+              className="w-full object-contain"
+              unoptimized
+              priority
+            />
+          </div>
+          <div className="mt-8 flex flex-col gap-4">
             <h1 className="text-5xl text-ink sm:text-6xl md:text-7xl">
               Eugene and Springfield lawns.
               <br />
@@ -24,29 +35,7 @@ export default function HomePage() {
               </a>
             </div>
           </div>
-          <div className="vinyl overflow-hidden bg-white p-3">
-            <Image
-              src={marks.logoProfile}
-              alt="Sharky's Lawn Care: polo shark, walk-behind mower"
-              width={720}
-              height={720}
-              className="w-full object-contain"
-              unoptimized
-              priority
-            />
-          </div>
         </div>
-      </section>
-
-      <section className="border-b-4 border-ink bg-white">
-        <Image
-          src={marks.coverPolo}
-          alt="Sharky's Lawn Care cover: polo shark and the service list"
-          width={960}
-          height={400}
-          className="mx-auto w-full max-w-5xl object-cover"
-          unoptimized
-        />
       </section>
 
       <section className="border-b-4 border-ink bg-ground">
