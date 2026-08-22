@@ -1,0 +1,553 @@
+"use client"
+
+import { useCallback, useEffect, useState } from "react"
+
+import { BrandMark } from "@/components/brand-mark"
+import type { LivePhoto, LiveService, LiveSite } from "@/lib/public"
+
+type Tab = "site" | "requests" | "photos" | "users"
+type Admin = { id: number; name: string }
+type Lead = {
+  id: number
+  created_at: string
+  name: string
+  phone: string
+  town: string
+  need: string
+  street: string | null
+  has_photos: number
+  photo_note: string | null
+  status: string
+}
+type UserRow = { id: number; name: string; created_at: string }
+
+const TABS: { id: Tab; label: string }[] = [
+  { id: "site", label: "Site" },
+  { id: "requests", label: "Requests" },
+  { id: "photos", label: "Photos" },
+  { id: "users", label: "Users" },
+]
+const STATUSES = ["New", "Called", "Scheduled", "Done"]
+
+async function api<T>(url: string, init?: RequestInit): Promise<T> {
+  const res = await fetch(url, { credentials: "include", ...init })
+  const body = await res.json().catch(() => ({}))
+  if (!res.ok) throw new Error(body.error || "Request failed")
+  return body as T
+}
+
+export function AdminApp() {
+  const [boot, setBoot] = useState<"load" | "setup" | "login" | "in">("load")
+  const [me, setMe] = useState<Admin | null>(null)
+  const [tab, setTab] = useState<Tab>("site")
+  const [note, setNote] = useState("")
+
+  const refreshMe = useCallback(async () => {
+    const data = await api<{ setup: boolean; admin: Admin | null }>("/api/auth/me")
+    if (data.setup) setBoot("setup")
+    else if (data.admin) {
+      setMe(data.admin)
+      setBoot("in")
+    } else setBoot("login")
+  }, [])
+
+  useEffect(() => {
+    refreshMe().catch(() => setBoot("login"))
+  }, [refreshMe])
+
+  if (boot === "load") {
+    return <AdminShell>Loading…</AdminShell>
+  }
+  if (boot === "setup") {
+    return (
+      <AdminShell>
+        <h1 className="text-5xl">Create owner</h1>
+        <p className="mt-3 max-w-md font-semibold">
+          First time only. This is Jonathan&apos;s admin. Bookmark /admin. Not linked from the public site.
+        </p>
+        <AuthForm
+          action="/api/auth/setup"
+          submit="Create owner"
+          onDone={refreshMe}
+        />
+      </AdminShell>
+    )
+  }
+  if (boot === "login") {
+    return (
+      <AdminShell>
+        <h1 className="text-5xl">Admin</h1>
+        <AuthForm action="/api/auth/login" submit="Sign in" onDone={refreshMe} />
+      </AdminShell>
+    )
+  }
+
+  return (
+    <AdminShell>
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h1 className="text-5xl">Admin</h1>
+          <p className="mt-1 font-extrabold">{me?.name}</p>
+        </div>
+        <button
+          type="button"
+          className="cta cta-mail"
+          style={{ minHeight: "44px" }}
+          onClick={async () => {
+            await fetch("/api/auth/logout", { method: "POST", credentials: "include" })
+            setMe(null)
+            setBoot("login")
+          }}
+        >
+          Sign out
+        </button>
+      </div>
+      <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
+        {TABS.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            className={item.id === tab ? "admin-tab admin-tab-on" : "admin-tab"}
+            onClick={() => {
+              setTab(item.id)
+              setNote("")
+            }}
+          >
+            {item.label}
+          </button>
+        ))}
+      </div>
+      {note ? <p className="mt-4 font-extrabold">{note}</p> : null}
+      {tab === "site" ? <SiteTab onNote={setNote} /> : null}
+      {tab === "requests" ? <RequestsTab onNote={setNote} /> : null}
+      {tab === "photos" ? <PhotosTab onNote={setNote} /> : null}
+      {tab === "users" ? <UsersTab me={me} onNote={setNote} /> : null}
+    </AdminShell>
+  )
+}
+
+function AdminShell({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-6">
+      <div className="stripe -mx-4" />
+      <BrandMark />
+      {children}
+    </div>
+  )
+}
+
+function AuthForm({
+  action,
+  submit,
+  onDone,
+}: {
+  action: string
+  submit: string
+  onDone: () => void
+}) {
+  const [error, setError] = useState("")
+  return (
+    <form
+      className="mt-6 flex max-w-md flex-col gap-3"
+      onSubmit={async (event) => {
+        event.preventDefault()
+        setError("")
+        const form = new FormData(event.currentTarget)
+        try {
+          await api(action, {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              name: form.get("name"),
+              password: form.get("password"),
+            }),
+          })
+          onDone()
+        } catch (err) {
+          setError(err instanceof Error ? err.message : "Failed")
+        }
+      }}
+    >
+      <label className="flex flex-col gap-1 text-sm font-extrabold uppercase">
+        Name
+        <input name="name" required className="field-ink" autoComplete="username" />
+      </label>
+      <label className="flex flex-col gap-1 text-sm font-extrabold uppercase">
+        Password
+        <input
+          name="password"
+          type="password"
+          required
+          minLength={8}
+          className="field-ink"
+          autoComplete={submit === "Sign in" ? "current-password" : "new-password"}
+        />
+      </label>
+      <button type="submit" className="cta cta-call w-fit" style={{ minHeight: "44px" }}>
+        {submit}
+      </button>
+      {error ? <p className="font-extrabold">{error}</p> : null}
+    </form>
+  )
+}
+
+function SiteTab({ onNote }: { onNote: (n: string) => void }) {
+  const [site, setSite] = useState<LiveSite | null>(null)
+  const [services, setServices] = useState<LiveService[]>([])
+  useEffect(() => {
+    api<{ site: LiveSite; services: LiveService[] }>("/api/admin/site")
+      .then((data) => {
+        setSite(data.site)
+        setServices(data.services)
+      })
+      .catch((err) => onNote(err.message))
+  }, [onNote])
+  if (!site) return <p className="mt-6">Loading site…</p>
+  const field = (key: keyof LiveSite, label: string, rows = 1) => (
+    <label className="flex flex-col gap-1 text-sm font-extrabold uppercase">
+      {label}
+      {rows > 1 ? (
+        <textarea
+          className="field-ink"
+          rows={rows}
+          value={site[key]}
+          onChange={(e) => setSite({ ...site, [key]: e.target.value })}
+        />
+      ) : (
+        <input
+          className="field-ink"
+          value={site[key]}
+          onChange={(e) => setSite({ ...site, [key]: e.target.value })}
+        />
+      )}
+    </label>
+  )
+  return (
+    <form
+      className="mt-6 flex max-w-xl flex-col gap-3"
+      onSubmit={async (event) => {
+        event.preventDefault()
+        try {
+          await api("/api/admin/site", {
+            method: "PUT",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ site, services }),
+          })
+          onNote("Site saved. Public page will pick it up.")
+        } catch (err) {
+          onNote(err instanceof Error ? err.message : "Save failed")
+        }
+      }}
+    >
+      {field("hero_title", "Hero title", 2)}
+      {field("hero_lead", "Lead", 3)}
+      {field("about", "About", 3)}
+      {field("phone_display", "Phone")}
+      {field("email", "Email")}
+      {field("towns", "Towns / service area")}
+      {field("cta_primary", "Primary CTA")}
+      {field("cta_secondary", "Secondary CTA")}
+      {field("quote_heading", "Quote heading")}
+      {field("quote_submit", "Quote submit")}
+      {field("quote_photos", "Quote photos label")}
+      {field("quote_helper", "Quote helper")}
+      <h2 className="mt-4 text-4xl">Services</h2>
+      {services.map((row, index) => (
+        <div key={`${row.slug}-${index}`} className="vinyl flex flex-col gap-2 p-3">
+          <input
+            className="field-ink"
+            value={row.name}
+            onChange={(e) => {
+              const next = [...services]
+              next[index] = { ...row, name: e.target.value }
+              setServices(next)
+            }}
+          />
+          <div className="flex flex-wrap gap-2">
+            <button type="button" className="admin-mini" onClick={() => {
+              if (index === 0) return
+              const next = [...services]
+              ;[next[index - 1], next[index]] = [next[index], next[index - 1]]
+              setServices(next)
+            }}>Up</button>
+            <button type="button" className="admin-mini" onClick={() => {
+              if (index === services.length - 1) return
+              const next = [...services]
+              ;[next[index + 1], next[index]] = [next[index], next[index + 1]]
+              setServices(next)
+            }}>Down</button>
+            <button type="button" className="admin-mini" onClick={() => {
+              setServices(services.filter((_, i) => i !== index))
+            }}>Remove</button>
+          </div>
+        </div>
+      ))}
+      <button
+        type="button"
+        className="cta cta-mail w-fit"
+        style={{ minHeight: "44px" }}
+        onClick={() => setServices([...services, { slug: `service-${services.length + 1}`, name: "New service" }])}
+      >
+        Add service
+      </button>
+      <button type="submit" className="cta cta-call w-fit" style={{ minHeight: "44px" }}>
+        Save site
+      </button>
+    </form>
+  )
+}
+
+function RequestsTab({ onNote }: { onNote: (n: string) => void }) {
+  const [leads, setLeads] = useState<Lead[]>([])
+  const load = useCallback(() => {
+    api<{ leads: Lead[] }>("/api/admin/leads")
+      .then((data) => setLeads(data.leads))
+      .catch((err) => onNote(err.message))
+  }, [onNote])
+  useEffect(() => {
+    load()
+  }, [load])
+  return (
+    <div className="mt-6 overflow-x-auto">
+      <table className="w-full min-w-[40rem] border-4 border-ink bg-white text-left text-sm">
+        <thead className="bg-hot text-white">
+          <tr>
+            {["When", "Name", "Phone", "Town", "What they need", "Street", "Photos", "Status"].map((h) => (
+              <th key={h} className="border-2 border-ink px-2 py-2 font-extrabold uppercase">
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {leads.map((lead) => (
+            <tr key={lead.id}>
+              <td className="border-2 border-ink px-2 py-2">{lead.created_at}</td>
+              <td className="border-2 border-ink px-2 py-2">{lead.name}</td>
+              <td className="border-2 border-ink px-2 py-2">{lead.phone}</td>
+              <td className="border-2 border-ink px-2 py-2">{lead.town}</td>
+              <td className="border-2 border-ink px-2 py-2">{lead.need}</td>
+              <td className="border-2 border-ink px-2 py-2">{lead.street || "—"}</td>
+              <td className="border-2 border-ink px-2 py-2">
+                {lead.has_photos ? lead.photo_note || "Yes" : "No"}
+              </td>
+              <td className="border-2 border-ink px-2 py-2">
+                <select
+                  className="field-ink min-h-11"
+                  value={lead.status}
+                  onChange={async (event) => {
+                    const status = event.target.value
+                    try {
+                      await api("/api/admin/leads", {
+                        method: "PATCH",
+                        headers: { "content-type": "application/json" },
+                        body: JSON.stringify({ id: lead.id, status }),
+                      })
+                      setLeads(leads.map((row) => (row.id === lead.id ? { ...row, status } : row)))
+                    } catch (err) {
+                      onNote(err instanceof Error ? err.message : "Status failed")
+                    }
+                  }}
+                >
+                  {STATUSES.map((status) => (
+                    <option key={status}>{status}</option>
+                  ))}
+                </select>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {leads.length === 0 ? <p className="mt-4 font-semibold">No requests yet.</p> : null}
+    </div>
+  )
+}
+
+function PhotosTab({ onNote }: { onNote: (n: string) => void }) {
+  const [photos, setPhotos] = useState<LivePhoto[]>([])
+  const load = useCallback(() => {
+    api<{ photos: LivePhoto[] }>("/api/admin/photos")
+      .then((data) => setPhotos(data.photos))
+      .catch((err) => onNote(err.message))
+  }, [onNote])
+  useEffect(() => {
+    load()
+  }, [load])
+  async function saveOrder(next: LivePhoto[]) {
+    setPhotos(next)
+    await api("/api/admin/photos", {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ order: next.map((p) => p.id) }),
+    })
+  }
+  return (
+    <div className="mt-6 flex max-w-xl flex-col gap-4">
+      <form
+        className="vinyl flex flex-col gap-3 p-4"
+        onSubmit={async (event) => {
+          event.preventDefault()
+          const form = event.currentTarget
+          const data = new FormData(form)
+          try {
+            await api("/api/admin/photos", { method: "POST", body: data })
+            form.reset()
+            onNote("Photo added.")
+            load()
+          } catch (err) {
+            onNote(err instanceof Error ? err.message : "Upload failed")
+          }
+        }}
+      >
+        <label className="flex flex-col gap-1 text-sm font-extrabold uppercase">
+          Add photo
+          <input name="file" type="file" accept="image/*" required className="field-ink py-2" />
+        </label>
+        <input name="caption" className="field-ink" placeholder="Caption" />
+        <button type="submit" className="cta cta-call w-fit" style={{ minHeight: "44px" }}>
+          Upload
+        </button>
+      </form>
+      {photos.map((photo, index) => (
+        <figure key={photo.id ?? photo.src} className="vinyl overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={photo.src} alt={photo.alt} className="h-auto w-full" />
+          <figcaption className="flex flex-col gap-2 border-t-4 border-ink p-3">
+            <input
+              className="field-ink"
+              value={photo.caption}
+              onChange={(e) => {
+                const next = [...photos]
+                next[index] = { ...photo, caption: e.target.value, alt: e.target.value }
+                setPhotos(next)
+              }}
+              onBlur={async () => {
+                if (!photo.id) return
+                await api("/api/admin/photos", {
+                  method: "PATCH",
+                  headers: { "content-type": "application/json" },
+                  body: JSON.stringify({ id: photo.id, caption: photo.caption, alt: photo.caption }),
+                })
+              }}
+            />
+            <div className="flex flex-wrap gap-2">
+              <button type="button" className="admin-mini" onClick={() => {
+                if (index === 0) return
+                const next = [...photos]
+                ;[next[index - 1], next[index]] = [next[index], next[index - 1]]
+                saveOrder(next).catch((err) => onNote(err.message))
+              }}>Up</button>
+              <button type="button" className="admin-mini" onClick={() => {
+                if (index === photos.length - 1) return
+                const next = [...photos]
+                ;[next[index + 1], next[index]] = [next[index], next[index + 1]]
+                saveOrder(next).catch((err) => onNote(err.message))
+              }}>Down</button>
+              <button type="button" className="admin-mini" onClick={async () => {
+                if (!photo.id) return
+                await api(`/api/admin/photos?id=${photo.id}`, { method: "DELETE" })
+                load()
+              }}>Remove</button>
+            </div>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  )
+}
+
+function UsersTab({ me, onNote }: { me: Admin | null; onNote: (n: string) => void }) {
+  const [users, setUsers] = useState<UserRow[]>([])
+  const load = useCallback(() => {
+    api<{ users: UserRow[] }>("/api/admin/users")
+      .then((data) => setUsers(data.users))
+      .catch((err) => onNote(err.message))
+  }, [onNote])
+  useEffect(() => {
+    load()
+  }, [load])
+  return (
+    <div className="mt-6 flex max-w-md flex-col gap-6">
+      <ul className="flex flex-col gap-2">
+        {users.map((user) => (
+          <li key={user.id} className="vinyl flex items-center justify-between gap-3 p-3">
+            <span className="font-extrabold">{user.name}</span>
+            <button
+              type="button"
+              className="admin-mini"
+              onClick={async () => {
+                try {
+                  const data = await api<{ users: UserRow[] }>(`/api/admin/users?id=${user.id}`, {
+                    method: "DELETE",
+                  })
+                  setUsers(data.users)
+                } catch (err) {
+                  onNote(err instanceof Error ? err.message : "Cannot remove")
+                }
+              }}
+            >
+              Remove
+            </button>
+          </li>
+        ))}
+      </ul>
+      <form
+        className="flex flex-col gap-3"
+        onSubmit={async (event) => {
+          event.preventDefault()
+          const form = new FormData(event.currentTarget)
+          try {
+            const data = await api<{ users: UserRow[] }>("/api/admin/users", {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({
+                name: form.get("name"),
+                password: form.get("password"),
+              }),
+            })
+            event.currentTarget.reset()
+            setUsers(data.users)
+            onNote("Admin added.")
+          } catch (err) {
+            onNote(err instanceof Error ? err.message : "Add failed")
+          }
+        }}
+      >
+        <h2 className="text-4xl">Add admin</h2>
+        <input name="name" required className="field-ink" placeholder="Name" />
+        <input name="password" type="password" required minLength={8} className="field-ink" placeholder="Password" />
+        <button type="submit" className="cta cta-call w-fit" style={{ minHeight: "44px" }}>
+          Add
+        </button>
+      </form>
+      <form
+        className="flex flex-col gap-3"
+        onSubmit={async (event) => {
+          event.preventDefault()
+          const form = new FormData(event.currentTarget)
+          try {
+            await api("/api/admin/users", {
+              method: "PATCH",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({
+                current: form.get("current"),
+                password: form.get("password"),
+              }),
+            })
+            event.currentTarget.reset()
+            onNote(`Password changed for ${me?.name}.`)
+          } catch (err) {
+            onNote(err instanceof Error ? err.message : "Password failed")
+          }
+        }}
+      >
+        <h2 className="text-4xl">Your password</h2>
+        <input name="current" type="password" required className="field-ink" placeholder="Current password" />
+        <input name="password" type="password" required minLength={8} className="field-ink" placeholder="New password" />
+        <button type="submit" className="cta cta-mail w-fit" style={{ minHeight: "44px" }}>
+          Change password
+        </button>
+      </form>
+    </div>
+  )
+}

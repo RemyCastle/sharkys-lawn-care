@@ -1,48 +1,50 @@
 # Sharky's Lawn Care
 
 Marketing site for **Sharky's Lawn Care LLC** in Springfield, Oregon.
-Static export. No CMS. No admin. No backend.
+Public site is a Next.js static export on Cloudflare Pages. Admin is `/admin` (bookmark only, not linked in chrome).
 
 Printed domain: [sharkyslawncare.com](https://sharkyslawncare.com) — add it on Cloudflare Pages when DNS exists. Do not invent DNS.
 
 ## Stack
 
-- Next.js App Router (`output: 'export'`)
-- TypeScript, Tailwind
-- Publish folder: `out/`
+- Next.js App Router (`output: 'export'`), publish `out/`
+- Cloudflare Pages Functions in `/functions` (APIs + session)
+- D1 `sharkys-lawn-care` (binding `DB`)
+- R2 `sharkys-lawn-care-photos` (binding `PHOTOS`)
 
-## Local
+## Local public static
 
 ```bash
 npm install
-npm run dev
 npm run build
 ```
 
-Open the build with any static server on `out/`.
-
-## Deploy on Cloudflare Pages (free)
-
-This is the handoff host. Not Render.
-
-1. Cloudflare Dashboard → Workers & Pages → Create → Pages → Connect to Git
-2. Repo: `RemyCastle/sharkys-lawn-care`
-3. Build command: `npm ci && npm run build`
-4. Build output directory: `out`
-5. Framework preset: None / static. Next already writes `out/`.
-6. After the first deploy you get a `*.pages.dev` URL.
-7. Custom domain `sharkyslawncare.com` later, when DNS exists.
-
-Direct upload after a local build:
+## Local admin (Pages Functions + D1)
 
 ```bash
-npm ci && npm run build
-npx wrangler pages deploy out --project-name=sharkys-lawn-care
+cp .dev.vars.example .dev.vars
+# put SESSION_SECRET in .dev.vars (do not commit it)
+npm run build
+npx wrangler d1 execute sharkys-lawn-care --local --file=schema.sql
+npx wrangler d1 execute sharkys-lawn-care --local --file=seed.sql
+npx wrangler pages dev ./out
 ```
 
-`wrangler.jsonc` sets `pages_build_output_dir` to `./out`.
+Open `/admin`. First visit: create owner. Then Site / Requests / Photos / Users.
 
-The quote form POSTs from the page to FormSubmit. Pages can do that. No server on the host.
+Remote D1 (after deploy):
+
+```bash
+npx wrangler d1 execute sharkys-lawn-care --remote --file=schema.sql
+npx wrangler d1 execute sharkys-lawn-care --remote --file=seed.sql
+npx wrangler pages secret put SESSION_SECRET --project-name=sharkys-lawn-care
+```
+
+## Deploy
+
+Same Pages project `sharkys-lawn-care`. Build: `npm ci && npm run build`. Output: `out`.
+
+Do not create another Pages project. Do not invent DNS. Not Render.
 
 ## Contact on the site
 
@@ -51,15 +53,13 @@ The quote form POSTs from the page to FormSubmit. Pages can do that. No server o
 - Facebook: [Sharky's Lawn Care LLC](https://www.facebook.com/people/Sharkys-Lawn-Care-LLC/61590475589390/)
 - Instagram: [@sharkyslawnmowingservice](https://www.instagram.com/sharkyslawnmowingservice/)
 - Owner: Jonathan Lopez
-- Address: 5172 A St, Springfield, OR 97478
-- Area: Eugene / Springfield, OR
+- Area: Eugene and Springfield area
 
-No hours. No star scores. No Google URL. No Sparky's.
+Street is optional on quote requests only. No street on the public site. No hours. No star scores. No Google URL. No Sparky's.
 
 ## Look
 
-White ground like the polo mark. Ink `#0B0F0C`. Lime `#3F8C10` / `#2E590F`. Steel `#36414C`. Teko + Barlow.
+Ground `#F4F5F3`. Ink `#0B0F0C`. Lime `#3F8C10` / `#2E590F`. Steel `#36414C`. Teko + Barlow.
 
-- `public/logo-profile.jpg` — polo-shark mark in the header
-- `public/cover-polo.jpg` — printed card on the home page
-- `public/work/pressure-wash-siding.jpg` — real job photo
+- `public/logo-mark.png` — header/footer polo mark
+- `public/cover-polo.jpg` — Services lock

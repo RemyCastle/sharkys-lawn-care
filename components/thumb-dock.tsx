@@ -1,7 +1,11 @@
+"use client"
+
+import { useLive } from "@/components/live-public"
 import { FacebookButton, InstagramButton } from "@/components/social-icons"
-import { site } from "@/lib/site"
+import { emailMailto, phoneTel } from "@/lib/public"
 
 export function ThumbDock() {
+  const { site } = useLive()
   return (
     <nav
       data-thumb-dock
@@ -10,14 +14,14 @@ export function ThumbDock() {
     >
       <div className="grid grid-cols-4">
         <a
-          href={site.phoneTel}
+          href={phoneTel(site.phone_display)}
           className="flex min-h-16 flex-col items-center justify-center bg-hot px-1 py-2 text-center"
         >
           <span className="font-display text-2xl uppercase leading-none">Call</span>
-          <span className="text-[10px] font-extrabold">{site.phoneDisplay}</span>
+          <span className="text-[10px] font-extrabold">{site.phone_display}</span>
         </a>
         <a
-          href={site.emailMailto}
+          href={emailMailto(site.email)}
           className="flex min-h-16 flex-col items-center justify-center border-l-2 border-ink px-1 py-2 text-center"
         >
           <span className="font-display text-2xl uppercase leading-none">Email</span>

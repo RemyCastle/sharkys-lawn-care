@@ -1,7 +1,10 @@
+"use client"
+
 import Link from "next/link"
 
 import { BrandMark } from "@/components/brand-mark"
-import { site } from "@/lib/site"
+import { useLive } from "@/components/live-public"
+import { phoneTel } from "@/lib/public"
 
 const nav = [
   { href: "/", label: "Home" },
@@ -10,6 +13,7 @@ const nav = [
 ]
 
 export function SiteHeader() {
+  const { site } = useLive()
   return (
     <header className="sticky top-0 z-40 border-b-4 border-ink bg-ground">
       <div className="stripe" />
@@ -24,11 +28,15 @@ export function SiteHeader() {
             </Link>
           ))}
           <a href="#quote" className="hover:text-hot">
-            {site.ctaSecondary}
+            {site.cta_secondary}
           </a>
         </nav>
-        <a href={site.phoneTel} className="cta cta-call" style={{ minHeight: "2.75rem", fontSize: "1.25rem" }}>
-          Call {site.phoneDisplay}
+        <a
+          href={phoneTel(site.phone_display)}
+          className="cta cta-call"
+          style={{ minHeight: "2.75rem", fontSize: "1.25rem" }}
+        >
+          Call {site.phone_display}
         </a>
       </div>
       <nav className="flex items-center justify-around border-t-2 border-ink px-2 py-2 text-xs font-extrabold uppercase tracking-wider md:hidden">

@@ -1,24 +1,27 @@
+"use client"
+
 import Image from "next/image"
 
+import { useLive } from "@/components/live-public"
 import { WorkStack } from "@/components/work-stack"
-import { marks, services, site } from "@/lib/site"
+import { marks } from "@/lib/site"
+import { phoneTel } from "@/lib/public"
 
-export default function HomePage() {
+export function HomeView() {
+  const { site, services } = useLive()
   return (
     <div className="bg-ground">
       <section className="border-b-4 border-ink bg-ground">
         <div className="mx-auto max-w-5xl px-4 py-8">
           <div className="flex flex-col gap-4">
-            <h1 className="text-5xl text-ink sm:text-6xl md:text-7xl">
-              {site.heroTitle}
-            </h1>
-            <p className="max-w-lg text-xl font-medium">{site.heroLead}</p>
+            <h1 className="text-5xl text-ink sm:text-6xl md:text-7xl">{site.hero_title}</h1>
+            <p className="max-w-lg text-xl font-medium">{site.hero_lead}</p>
             <div className="flex flex-col gap-3 sm:max-w-sm">
-              <a href={site.phoneTel} className="cta cta-call">
-                {site.ctaPrimary}
+              <a href={phoneTel(site.phone_display)} className="cta cta-call">
+                {site.cta_primary}
               </a>
               <a href="#quote" className="cta cta-mail">
-                {site.ctaSecondary}
+                {site.cta_secondary}
               </a>
             </div>
           </div>

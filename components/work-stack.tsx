@@ -1,10 +1,13 @@
-import { jobPhotos } from "@/lib/site"
+"use client"
+
+import { useLive } from "@/components/live-public"
 
 export function WorkStack() {
+  const { photos } = useLive()
   return (
     <div className="mt-8 flex max-w-xl flex-col gap-6">
-      {jobPhotos.map((photo, index) => (
-        <figure key={photo.src} className="vinyl overflow-hidden">
+      {photos.map((photo, index) => (
+        <figure key={photo.src + String(photo.id ?? index)} className="vinyl overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={photo.src}

@@ -1,11 +1,6 @@
 import type { Metadata } from "next"
 import { Barlow, Teko } from "next/font/google"
 
-import { LocalBusinessJsonLd } from "@/components/local-business-json-ld"
-import { QuoteBlock } from "@/components/quote-block"
-import { SiteFooter } from "@/components/site-footer"
-import { SiteHeader } from "@/components/site-header"
-import { ThumbDock } from "@/components/thumb-dock"
 import { marks, site } from "@/lib/site"
 
 import "./globals.css"
@@ -70,14 +65,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${barlow.variable} ${teko.variable} h-full`}>
-      <body className="flex min-h-full flex-col bg-ground pb-40 md:pb-8">
-        <LocalBusinessJsonLd />
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <QuoteBlock />
-        <SiteFooter />
-        <ThumbDock />
-      </body>
+      <body className="min-h-full bg-ground">{children}</body>
     </html>
   )
 }

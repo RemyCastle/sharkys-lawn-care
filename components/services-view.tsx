@@ -1,15 +1,13 @@
-import type { Metadata } from "next"
+"use client"
+
 import Image from "next/image"
 
-import { marks, services, site } from "@/lib/site"
+import { useLive } from "@/components/live-public"
+import { marks } from "@/lib/site"
+import { phoneTel } from "@/lib/public"
 
-export const metadata: Metadata = {
-  title: "Services",
-  description: site.seoDescription,
-  alternates: { canonical: "/services/" },
-}
-
-export default function ServicesPage() {
+export function ServicesView() {
+  const { site, services } = useLive()
   return (
     <div className="bg-ground">
       <div className="mx-auto max-w-5xl px-4 py-12">
@@ -30,8 +28,8 @@ export default function ServicesPage() {
             <li key={service.slug}>{service.name}</li>
           ))}
         </ul>
-        <a href={site.phoneTel} className="cta cta-call mt-10">
-          {site.ctaPrimary}
+        <a href={phoneTel(site.phone_display)} className="cta cta-call mt-10">
+          {site.cta_primary}
         </a>
       </div>
     </div>
