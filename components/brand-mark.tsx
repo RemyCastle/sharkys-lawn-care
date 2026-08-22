@@ -11,14 +11,21 @@ export function BrandMark({
   priority?: boolean
 }) {
   return (
-    <Image
-      src={marks.logoMark}
-      alt="Sharky's Lawn Care"
-      width={220}
-      height={209}
-      className={cn("h-16 w-auto object-contain", className)}
-      unoptimized
-      priority={priority}
-    />
+    <span
+      className={cn(
+        "hoodie-mark relative block h-16 w-40 overflow-hidden bg-white",
+        className,
+      )}
+    >
+      <Image
+        src={marks.card}
+        alt="Sharky's Lawn Care"
+        width={1200}
+        height={1600}
+        className="hoodie-mark-img absolute top-[-4%] left-[-4%] h-auto w-[250%] max-w-none"
+        unoptimized
+        priority={priority}
+      />
+    </span>
   )
 }
