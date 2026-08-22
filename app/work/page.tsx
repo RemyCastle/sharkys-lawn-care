@@ -44,6 +44,26 @@ export default function WorkPage() {
             >
               Call {site.phoneDisplay}
             </a>
+            <a
+              href={site.facebook}
+              rel="noreferrer"
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "inline-flex h-12 rounded-sm border-2 px-5 text-base font-extrabold"
+              )}
+            >
+              Facebook
+            </a>
+            <a
+              href={site.instagram}
+              rel="noreferrer"
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "inline-flex h-12 rounded-sm border-2 px-5 text-base font-extrabold"
+              )}
+            >
+              {site.instagramHandle}
+            </a>
           </div>
         </div>
         <ul className="grid gap-2 md:grid-cols-2">

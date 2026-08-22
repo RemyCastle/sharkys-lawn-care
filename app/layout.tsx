@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   description: `${site.heroTitle} ${site.heroLead} ${site.tagline} Call ${site.phoneDisplay}.`,
   applicationName: site.name,
   icons: {
-    icon: "/cover-polo.jpg",
+    icon: "/logo-profile.jpg",
   },
   openGraph: {
     title: `${site.name} · ${site.townShort}`,

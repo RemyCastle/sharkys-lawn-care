@@ -15,6 +15,8 @@ export const site = {
   siteUrl: "https://sharkyslawncare.com",
   facebook:
     "https://www.facebook.com/people/Sharkys-Lawn-Care-LLC/61590475589390/",
+  instagram: "https://www.instagram.com/sharkyslawnmowingservice/",
+  instagramHandle: "@sharkyslawnmowingservice",
   tagline: "Reliable. Professional. Affordable.",
   heroKicker: "Sharky's Lawn Care LLC",
   heroTitle: "Eugene and Springfield lawns. We cut them.",
@@ -27,8 +29,9 @@ export const site = {
 } as const
 
 export const marks = {
-  hoodieRider: "/card-hoodie-rider.jpg",
+  logoProfile: "/logo-profile.jpg",
   coverPolo: "/cover-polo.jpg",
+  card: "/card.jpg",
 } as const
 
 export const jobPhoto = {

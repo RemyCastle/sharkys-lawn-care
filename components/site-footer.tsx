@@ -31,6 +31,10 @@ export function SiteFooter() {
             className="break-all underline decoration-hot underline-offset-4"
           >
             {site.facebook}
+          </a>{" "}
+          ·{" "}
+          <a href={site.instagram} rel="noreferrer" className="hover:text-hot">
+            {site.instagramHandle}
           </a>
         </p>
         <div className="flex flex-col gap-2 text-sm font-semibold sm:flex-row sm:flex-wrap sm:gap-x-6">
