@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-import { WorkStream } from "@/components/work-stream"
+import { WorkStack } from "@/components/work-stack"
 import { marks, services, site } from "@/lib/site"
 
 export default function HomePage() {
@@ -46,10 +46,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-b-4 border-ink bg-ground">
+      <section id="work" className="border-b-4 border-ink bg-ground">
         <div className="mx-auto max-w-5xl px-4 py-12">
           <h2 className="text-5xl">Work</h2>
-          <WorkStream />
+          <WorkStack />
         </div>
       </section>
 

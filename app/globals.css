@@ -116,48 +116,6 @@
   border-left: 10px solid #3f8c10;
 }
 
-.work-stream {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: 0;
-  overscroll-behavior-x: contain;
-  touch-action: pan-x;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding-bottom: 0.35rem;
-}
-
-.work-stream::-webkit-scrollbar {
-  display: none;
-}
-
-.work-slide {
-  flex: 0 0 calc(100% - 36px);
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .work-stream {
-    scroll-behavior: auto;
-    scroll-snap-type: x mandatory;
-  }
-}
-
-.work-dot {
-  width: 0.7rem;
-  height: 0.7rem;
-  border: 3px solid #0b0f0c;
-  background: #ffffff;
-  padding: 0;
-}
-
-.work-dot[aria-current="true"] {
-  background: #3f8c10;
-}
-
 .stripe {
   height: 14px;
   background: repeating-linear-gradient(
