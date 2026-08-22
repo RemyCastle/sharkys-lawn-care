@@ -16,10 +16,14 @@ export const site = {
     "https://www.facebook.com/people/Sharkys-Lawn-Care-LLC/61590475589390/",
   instagram: "https://www.instagram.com/sharkyslawnmowingservice/",
   instagramHandle: "@sharkyslawnmowingservice",
-  tagline: "Reliable, Professional, Affordable",
+  tagline: "Reliable. Professional. Affordable.",
   taglineParts: ["Reliable", "Professional", "Affordable"] as const,
   years: "10+ years",
-  yearsLine: "10+ years experience",
+  yearsLine: "10+ years",
+  heroKicker: "Sharky's Lawn Care",
+  heroTitle: "Springfield lawns. We cut them.",
+  heroLead:
+    "Mow, edge, trim, blow. Then the jobs that wait: mulch, blackberries, thatch, cleanup, pressure wash. Eugene and Springfield.",
 } as const
 
 export const facts = [

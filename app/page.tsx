@@ -1,11 +1,10 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Mail } from "lucide-react"
+import { Mail, Phone } from "lucide-react"
 
 import { HeroCard } from "@/components/hero-card"
 import { QuoteForm } from "@/components/quote-form"
 import { SectionHead } from "@/components/section-head"
-import { Ticker } from "@/components/ticker"
 import { buttonVariants } from "@/components/ui/button"
 import { facts, services, site } from "@/lib/site"
 import { cn } from "@/lib/utils"
@@ -18,7 +17,7 @@ export default function HomePage() {
           <div className="mx-auto max-w-6xl">
             <Image
               src="/cover-polo.jpg"
-              alt="Sharky's Lawn Care Facebook cover: polo shark, walk-behind mower, and the service list"
+              alt="Sharky's Lawn Care cover: polo shark, walk-behind mower, and the service list"
               width={960}
               height={400}
               className="w-full object-cover"
@@ -29,46 +28,54 @@ export default function HomePage() {
         </div>
         <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-10 md:grid-cols-[1.1fr_0.9fr] md:py-14">
           <div className="flex flex-col gap-5">
-            <h1 className="text-5xl text-ink sm:text-6xl md:text-7xl">
-              {site.town}
-            </h1>
-            <p className="max-w-md text-xl font-medium text-ink">
-              {site.serviceArea}. Free estimates. Message Jonathan Lopez on
-              Facebook if the grass got ahead of you.
+            <p className="text-sm font-extrabold uppercase tracking-[0.22em] text-steel">
+              {site.heroKicker}
             </p>
-            <div className="flex flex-col gap-3 sm:flex-row">
+            <h1 className="text-5xl text-ink sm:text-6xl md:text-7xl">
+              Springfield lawns.
+              <br />
+              We cut them.
+            </h1>
+            <p className="max-w-lg text-xl font-medium text-ink">{site.heroLead}</p>
+            <p className="text-lg font-extrabold">{site.tagline}</p>
+            <div className="flex flex-col gap-3">
               <a
-                href={site.facebook}
-                target="_blank"
-                rel="noreferrer"
+                href={site.phoneTel}
                 className={cn(
                   buttonVariants({ variant: "default" }),
                   "h-14 rounded-sm px-5 text-lg font-extrabold"
                 )}
               >
-                Message on Facebook
+                <Phone data-icon="inline-start" />
+                Call {site.phoneDisplay}
               </a>
               <a
                 href={site.emailMailto}
                 className={cn(
                   buttonVariants({ variant: "outline" }),
-                  "h-14 rounded-sm border-2 px-5 text-lg font-extrabold"
+                  "h-12 rounded-sm border-2 px-5 text-base font-extrabold"
                 )}
               >
                 <Mail data-icon="inline-start" />
-                Email
+                {site.email}
+              </a>
+              <a
+                href={site.facebook}
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm font-extrabold uppercase tracking-wider hover:text-hot"
+              >
+                Facebook message
               </a>
             </div>
             <p className="font-display text-2xl uppercase text-steel">
-              {site.owner}, {site.ownerTitle}
+              {site.owner}
             </p>
           </div>
 
           <HeroCard />
         </div>
       </section>
-
-      <Ticker />
 
       <section className="border-b-4 border-ink bg-ground">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 px-4 py-6 md:grid-cols-5">
@@ -88,7 +95,7 @@ export default function HomePage() {
           <SectionHead
             kicker="The list"
             title="Services"
-            note="Same work as the card back and the Facebook cover."
+            note="Same work as the card back."
           />
           <div className="grid gap-4 md:grid-cols-2">
             {services.map((service, index) => (
@@ -120,7 +127,7 @@ export default function HomePage() {
             invert
             kicker="Yards"
             title="Work"
-            note="One job photo we have on this site. More live on Facebook and Instagram."
+            note="One job photo on this site. More live on Facebook."
           />
           <div className="sport-card overflow-hidden">
             <Image
@@ -135,34 +142,7 @@ export default function HomePage() {
               <p className="font-display text-3xl uppercase text-ground">
                 Pressure wash
               </p>
-              <p className="text-sm font-semibold text-ground/80">
-                Real lot. Not a stock download.
-              </p>
             </div>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <a
-              href={site.facebook}
-              target="_blank"
-              rel="noreferrer"
-              className={cn(
-                buttonVariants({ variant: "default" }),
-                "h-12 w-fit rounded-sm px-5 text-base font-extrabold"
-              )}
-            >
-              Open Facebook
-            </a>
-            <a
-              href={site.instagram}
-              target="_blank"
-              rel="noreferrer"
-              className={cn(
-                buttonVariants({ variant: "outline" }),
-                "h-12 w-fit rounded-sm border-2 px-5 text-base font-extrabold"
-              )}
-            >
-              {site.instagramHandle}
-            </a>
           </div>
         </div>
       </section>
@@ -172,7 +152,7 @@ export default function HomePage() {
           <SectionHead
             kicker="Book it"
             title="Get a time"
-            note="Four fields. We write you back. Or skip the form and message on Facebook."
+            note="Name, phone, town, what you need. Or just call."
           />
           <div className="sport-card p-5">
             <QuoteForm />

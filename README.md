@@ -37,13 +37,14 @@ Do **not** create a Web Service. Free web services sleep. This build is files on
 
 Only facts from the business card, Facebook, and Instagram:
 
-- Primary CTA: [Message on Facebook](https://www.facebook.com/people/Sharkys-Lawn-Care-LLC/61590475589390/)
+- Primary CTA: Call [(541) 579-0726](tel:+15415790726)
 - Email [sharkyslawncare.541@gmail.com](mailto:sharkyslawncare.541@gmail.com)
+- Facebook message: [Sharky's Lawn Care LLC](https://www.facebook.com/people/Sharkys-Lawn-Care-LLC/61590475589390/)
 - Instagram: [@sharkyslawnmowingservice](https://www.instagram.com/sharkyslawnmowingservice/)
 - Owner: Jonathan Lopez
-- Area: Eugene / Springfield and surrounding areas
+- Area: Eugene / Springfield
 
-No street address. No Google URL. The quote form opens a mailto. Facebook cover is brand reference only — not hotlinked.
+No street address. No Google URL. The quote form opens a mailto.
 
 ## Look
 

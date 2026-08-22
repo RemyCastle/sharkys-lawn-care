@@ -25,7 +25,7 @@ export function QuoteForm() {
     event.preventDefault()
     const subject = encodeURIComponent(`Estimate — ${town || "yard"} — ${name || "new"}`)
     const body = encodeURIComponent(
-      `Name: ${name}\nPhone: ${phone}\nTown: ${town}\nJob: ${job}`
+      `Name: ${name}\nPhone: ${phone}\nTown: ${town}\nWhat you need: ${job}`
     )
     const mailbox = document.createElement("a")
     mailbox.href = `${site.emailMailto}?subject=${subject}&body=${body}`
@@ -72,10 +72,9 @@ export function QuoteForm() {
             onChange={(event) => setTown(event.target.value)}
             className="h-12 rounded-sm border-2 bg-ground"
           />
-          <FieldDescription>Springfield, Eugene, or nearby.</FieldDescription>
         </Field>
         <Field>
-          <FieldLabel htmlFor="quote-job">Job</FieldLabel>
+          <FieldLabel htmlFor="quote-job">What you need</FieldLabel>
           <Textarea
             id="quote-job"
             name="job"
@@ -83,7 +82,7 @@ export function QuoteForm() {
             rows={4}
             value={job}
             onChange={(event) => setJob(event.target.value)}
-            placeholder="Mow, blackberries, mulch, clean-up…"
+            placeholder="Mow, blackberries, mulch, cleanup…"
             className="rounded-sm border-2 bg-ground"
           />
         </Field>
@@ -109,8 +108,7 @@ export function QuoteForm() {
         </a>
       </div>
       <p className="text-sm text-steel">
-        Opens your mail app. Writes to {site.email}. No form backend. Facebook
-        is faster if you want a back-and-forth.
+        Opens your mail app. Writes to {site.email}. Or call {site.phoneDisplay}.
       </p>
     </form>
   )

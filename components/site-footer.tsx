@@ -6,44 +6,38 @@ import { site } from "@/lib/site"
 export function SiteFooter() {
   return (
     <footer className="border-t-4 border-ink bg-ink text-ground">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-3">
-        <div className="flex flex-col gap-2">
+      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10">
+        <div className="flex items-center gap-4">
           <Image
             src="/mark.svg"
-            alt="Sharky's Lawn Care"
-            width={160}
-            height={160}
-            className="size-28 bg-white object-contain"
+            alt=""
+            width={72}
+            height={72}
+            className="size-16 bg-white object-contain"
             unoptimized
           />
-          <p className="text-sm font-semibold">{site.legalName}</p>
-          <p className="text-sm">
-            {site.town}
-            <br />
-            {site.serviceArea}
+          <p className="font-display text-4xl uppercase leading-none">
+            Sharky&apos;s Lawn Care
           </p>
-          <p className="text-sm text-ground/80">
-            Insured &amp; bonded. {site.yearsLine}. Locally owned.
-          </p>
-          <p className="font-display text-2xl uppercase text-hot">{site.domain}</p>
         </div>
-        <div className="flex flex-col gap-2 text-sm font-semibold">
-          <p className="font-display text-3xl uppercase leading-none">Talk</p>
-          <a href={site.facebook} target="_blank" rel="noreferrer" className="hover:text-hot">
-            Message on Facebook
-          </a>
+        <p className="max-w-3xl text-base font-semibold leading-relaxed">
+          Sharky&apos;s Lawn Care · Eugene / Springfield ·{" "}
+          <a href={site.phoneTel} className="underline decoration-hot underline-offset-4">
+            {site.phoneDisplay}
+          </a>{" "}
+          · Insured and bonded · 10+ years
+        </p>
+        <div className="flex flex-col gap-2 text-sm font-semibold sm:flex-row sm:flex-wrap sm:gap-x-6">
           <a href={site.emailMailto} className="hover:text-hot">
             {site.email}
+          </a>
+          <a href={site.facebook} target="_blank" rel="noreferrer" className="hover:text-hot">
+            Facebook message
           </a>
           <a href={site.instagram} target="_blank" rel="noreferrer" className="hover:text-hot">
             Instagram {site.instagramHandle}
           </a>
-          <p>
-            {site.owner}, {site.ownerTitle}
-          </p>
-        </div>
-        <div className="flex flex-col gap-2 text-sm font-semibold">
-          <p className="font-display text-3xl uppercase leading-none">Pages</p>
+          <span>{site.owner}</span>
           <Link href="/" className="hover:text-hot">
             Home
           </Link>
@@ -54,6 +48,7 @@ export function SiteFooter() {
             Work
           </Link>
         </div>
+        <p className="text-sm text-ground/70">{site.domain}</p>
       </div>
     </footer>
   )

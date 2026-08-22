@@ -15,9 +15,9 @@ export default function ServicesPage() {
     <div className="sun-field">
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-12">
         <SectionHead
-          kicker={`${site.townShort} · card back`}
+          kicker="The list"
           title="Services"
-          note="Jonathan Lopez put this list on the business card. Same list as the Facebook cover."
+          note="Mow, edge, trim, blow. Then mulch, blackberries, thatch, cleanup, pressure wash."
         />
         <div className="flex flex-col gap-4">
           {services.map((service, index) => (
@@ -36,15 +36,13 @@ export default function ServicesPage() {
           ))}
         </div>
         <a
-          href={site.facebook}
-          target="_blank"
-          rel="noreferrer"
+          href={site.phoneTel}
           className={cn(
             buttonVariants({ variant: "default" }),
             "h-14 w-fit rounded-sm px-5 text-lg font-extrabold"
           )}
         >
-          Message on Facebook
+          Call {site.phoneDisplay}
         </a>
       </div>
     </div>

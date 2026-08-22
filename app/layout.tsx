@@ -26,14 +26,14 @@ export const metadata: Metadata = {
     default: `${site.name} · ${site.townShort}`,
     template: `%s · ${site.name}`,
   },
-  description: `${site.name} in ${site.town}. ${site.tagline}. Free estimates. ${site.serviceArea}. Message on Facebook.`,
+  description: `${site.heroTitle} ${site.heroLead} ${site.tagline} Call ${site.phoneDisplay}.`,
   applicationName: site.name,
   icons: {
     icon: "/mark.svg",
   },
   openGraph: {
     title: `${site.name} · ${site.townShort}`,
-    description: `${site.tagline}. Free estimates. Message on Facebook.`,
+    description: `${site.heroTitle} ${site.tagline} Call ${site.phoneDisplay}.`,
     url: site.siteUrl,
     siteName: site.domain,
     locale: "en_US",

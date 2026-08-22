@@ -17,9 +17,9 @@ export default function WorkPage() {
       <div className="jersey-band h-4" />
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-12">
         <SectionHead
-          kicker="One job on file"
+          kicker="Yards"
           title="Work"
-          note="This pressure-wash shot is theirs. We did not grab stock siding. More yards live on Facebook."
+          note="One job photo on this site. More live on Facebook."
         />
         <figure className="sport-card overflow-hidden">
           <Image
@@ -34,27 +34,35 @@ export default function WorkPage() {
           <figcaption className="border-t-4 border-ink px-4 py-3">
             <p className="font-display text-3xl uppercase">Pressure wash</p>
             <p className="text-sm font-semibold text-steel">
-              Siding job from their Facebook. Local file. Not a hotlink.
+              A pressure-wash job. Their photo.
             </p>
           </figcaption>
         </figure>
         <div className="sport-card-steel p-6">
-          <p className="font-display text-4xl uppercase">The public hubs</p>
+          <p className="font-display text-4xl uppercase">More shots</p>
           <p className="mt-2 max-w-xl text-ground/90">
-            Facebook and Instagram hold the rest of the yard shots. No Google
-            listing URL on this site.
+            Facebook and Instagram hold the rest.
           </p>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row">
             <a
-              href={site.facebook}
-              target="_blank"
-              rel="noreferrer"
+              href={site.phoneTel}
               className={cn(
                 buttonVariants({ variant: "default" }),
                 "inline-flex h-12 rounded-sm px-5 text-base font-extrabold"
               )}
             >
-              Message on Facebook
+              Call {site.phoneDisplay}
+            </a>
+            <a
+              href={site.facebook}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "inline-flex h-12 rounded-sm border-2 px-5 text-base font-extrabold"
+              )}
+            >
+              Facebook message
             </a>
             <a
               href={site.instagram}
