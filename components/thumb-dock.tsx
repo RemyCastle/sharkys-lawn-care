@@ -1,3 +1,4 @@
+import { FacebookButton, InstagramButton } from "@/components/social-icons"
 import { site } from "@/lib/site"
 
 export function ThumbDock() {
@@ -21,23 +22,15 @@ export function ThumbDock() {
         >
           <span className="font-display text-2xl uppercase leading-none">Email</span>
         </a>
-        <a
-          href={site.instagram}
-          rel="noreferrer"
-          className="flex min-h-16 flex-col items-center justify-center border-l-2 border-ink px-1 py-2 text-center"
-        >
-          <span className="font-display text-2xl uppercase leading-none">IG</span>
-          <span className="max-w-full truncate text-[10px] font-extrabold">
-            {site.instagramHandle}
-          </span>
-        </a>
-        <a
-          href={site.facebook}
-          rel="noreferrer"
-          className="flex min-h-16 flex-col items-center justify-center border-l-2 border-ink px-1 py-2 text-center"
-        >
-          <span className="font-display text-2xl uppercase leading-none">Facebook</span>
-        </a>
+        <InstagramButton
+          gradientId="ig-official-dock"
+          className="flex min-h-16 items-center justify-center border-l-2 border-ink px-1 py-2"
+          markClassName="size-10"
+        />
+        <FacebookButton
+          className="flex min-h-16 items-center justify-center border-l-2 border-ink px-1 py-2"
+          markClassName="size-10"
+        />
       </div>
     </nav>
   )

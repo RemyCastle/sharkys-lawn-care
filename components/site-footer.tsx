@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import { BrandMark } from "@/components/brand-mark"
+import { SocialButtons } from "@/components/social-icons"
 import { site } from "@/lib/site"
 
 export function SiteFooter() {
@@ -20,15 +21,8 @@ export function SiteFooter() {
           </a>
           {" · "}
           {site.domain}
-          {" · "}
-          <a href={site.facebook} rel="noreferrer" className="underline decoration-hot underline-offset-4">
-            Facebook
-          </a>
-          {" · "}
-          <a href={site.instagram} rel="noreferrer" className="underline decoration-hot underline-offset-4">
-            {site.instagramHandle}
-          </a>
         </p>
+        <SocialButtons />
         <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
           <Link href="/" className="hover:text-hot">
             Home
