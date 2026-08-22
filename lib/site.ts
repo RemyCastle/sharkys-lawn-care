@@ -14,6 +14,10 @@ export const site = {
   formSubmit: "https://formsubmit.co/sharkyslawncare.541@gmail.com",
   domain: "sharkyslawncare.com",
   siteUrl: "https://sharkyslawncare.com",
+  seoTitle: "Sharky's Lawn Care LLC | Lawn Care in Springfield and Eugene, OR",
+  seoDescription:
+    "Mow, edge, trim, blow, mulch, blackberry removal, thatch and aerate, cleanup, pressure wash. Jonathan Lopez. Call (541) 579-0726.",
+  telephoneE164: "+1-541-579-0726",
   facebook:
     "https://www.facebook.com/people/Sharkys-Lawn-Care-LLC/61590475589390/",
   instagram: "https://www.instagram.com/sharkyslawnmowingservice/",
@@ -41,7 +45,7 @@ export const marks = {
 export const jobPhotos = [
   {
     src: "/work/pressure-wash-siding.jpg",
-    alt: "Pressure-wash job: house siding, part washed, part still oxidized",
+    alt: "House siding after a pressure-wash job: left side still oxidized, right side cleaned, dirt bed in front",
     caption: "Pressure Wash",
     width: 720,
     height: 540,

@@ -4,7 +4,8 @@ import { services, site } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "Services",
-  description: site.heroLead,
+  description: site.seoDescription,
+  alternates: { canonical: "/services/" },
 }
 
 export default function ServicesPage() {

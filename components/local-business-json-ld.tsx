@@ -1,0 +1,48 @@
+import { services, site } from "@/lib/site"
+
+export function LocalBusinessJsonLd() {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: site.name,
+    founder: {
+      "@type": "Person",
+      name: site.owner,
+    },
+    telephone: site.telephoneE164,
+    email: site.email,
+    url: site.siteUrl,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "5172 A St",
+      addressLocality: "Springfield",
+      addressRegion: "OR",
+      postalCode: "97478",
+      addressCountry: "US",
+    },
+    areaServed: [
+      { "@type": "City", name: "Eugene" },
+      { "@type": "City", name: "Springfield" },
+      "surrounding",
+    ],
+    sameAs: [site.facebook, site.instagram],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Services",
+      itemListElement: services.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service.name,
+        },
+      })),
+    },
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  )
+}

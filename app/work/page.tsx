@@ -5,7 +5,8 @@ import { jobPhotos, site } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "Work",
-  description: `A real ${site.name} pressure-wash job.`,
+  description: site.seoDescription,
+  alternates: { canonical: "/work/" },
 }
 
 export default function WorkPage() {
