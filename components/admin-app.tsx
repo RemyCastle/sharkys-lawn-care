@@ -5,8 +5,9 @@ import { useCallback, useEffect, useState } from "react"
 import { BrandMark } from "@/components/brand-mark"
 import { pairIsComplete, type LivePair } from "@/lib/pairs"
 import type { LivePhoto, LiveService, LiveSite } from "@/lib/public"
+import type { LiveReview } from "@/lib/reviews"
 
-type Tab = "site" | "requests" | "photos" | "users"
+type Tab = "site" | "requests" | "photos" | "reviews" | "users"
 type Admin = { id: number; name: string }
 type Lead = {
   id: number
@@ -26,6 +27,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "site", label: "Site" },
   { id: "requests", label: "Requests" },
   { id: "photos", label: "Photos" },
+  { id: "reviews", label: "Reviews" },
   { id: "users", label: "Users" },
 ]
 const STATUSES = ["New", "Called", "Scheduled", "Done"]
@@ -103,7 +105,7 @@ export function AdminApp() {
           Sign out
         </button>
       </div>
-      <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
+      <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
         {TABS.map((item) => (
           <button
             key={item.id}
@@ -122,6 +124,7 @@ export function AdminApp() {
       {tab === "site" ? <SiteTab onNote={setNote} /> : null}
       {tab === "requests" ? <RequestsTab onNote={setNote} /> : null}
       {tab === "photos" ? <PhotosTab onNote={setNote} /> : null}
+      {tab === "reviews" ? <ReviewsTab onNote={setNote} /> : null}
       {tab === "users" ? <UsersTab me={me} onNote={setNote} /> : null}
     </AdminShell>
   )
@@ -757,6 +760,192 @@ function PhotosTab({ onNote }: { onNote: (n: string) => void }) {
             </div>
           </figcaption>
         </figure>
+      ))}
+    </div>
+  )
+}
+
+function ReviewsTab({ onNote }: { onNote: (n: string) => void }) {
+  const [reviews, setReviews] = useState<LiveReview[]>([])
+  const load = useCallback(() => {
+    api<{ reviews: LiveReview[] }>("/api/admin/reviews")
+      .then((data) => setReviews(data.reviews || []))
+      .catch((err) => onNote(err.message))
+  }, [onNote])
+  useEffect(() => {
+    load()
+  }, [load])
+  return (
+    <div className="mt-6 flex max-w-xl flex-col gap-4">
+      <div>
+        <h2 className="text-4xl">Featured reviews</h2>
+        <p className="mt-2 font-semibold">
+          Optional. Paste a real review from Sharky&apos;s Lawn Care LLC. Public only shows
+          featured rows, highest stars first. Zero featured means the site only has Review us
+          and See reviews. Do not invent a quote. Do not paste Sparky&apos;s.
+        </p>
+      </div>
+      <form
+        className="vinyl flex flex-col gap-3 p-4"
+        onSubmit={async (event) => {
+          event.preventDefault()
+          const form = event.currentTarget
+          const data = new FormData(form)
+          try {
+            await api("/api/admin/reviews", {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({
+                name: data.get("name"),
+                stars: Number(data.get("stars")),
+                body: data.get("body"),
+                source: data.get("source"),
+                featured: data.get("featured") === "1" ? 1 : 0,
+              }),
+            })
+            form.reset()
+            onNote("Review saved.")
+            load()
+          } catch (err) {
+            onNote(err instanceof Error ? err.message : "Could not save")
+          }
+        }}
+      >
+        <input name="name" className="field-ink" required placeholder="Name" />
+        <label className="flex flex-col gap-1 text-sm font-extrabold uppercase">
+          Stars
+          <select name="stars" className="field-ink" required defaultValue="5">
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+          </select>
+        </label>
+        <textarea name="body" className="field-ink min-h-28" required placeholder="The review" />
+        <input name="source" className="field-ink" placeholder="Source, optional" />
+        <label className="flex items-center gap-2 font-extrabold">
+          <input name="featured" type="checkbox" value="1" defaultChecked className="size-5 accent-hot" />
+          Show on the site
+        </label>
+        <button type="submit" className="cta cta-call w-fit" style={{ minHeight: "44px" }}>
+          Add review
+        </button>
+      </form>
+      {reviews.length === 0 ? (
+        <p className="font-semibold">No featured reviews yet. Public stays buttons only.</p>
+      ) : null}
+      {reviews.map((review, index) => (
+        <article key={review.id} className="vinyl flex flex-col gap-3 p-4">
+          <input
+            className="field-ink"
+            value={review.name}
+            onChange={(event) => {
+              const next = [...reviews]
+              next[index] = { ...review, name: event.target.value }
+              setReviews(next)
+            }}
+            onBlur={async () => {
+              if (!review.name.trim()) return
+              await api("/api/admin/reviews", {
+                method: "PATCH",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify(review),
+              })
+            }}
+          />
+          <label className="flex flex-col gap-1 text-sm font-extrabold uppercase">
+            Stars
+            <select
+              className="field-ink"
+              value={review.stars}
+              onChange={async (event) => {
+                const stars = Number(event.target.value)
+                const next = [...reviews]
+                next[index] = { ...review, stars }
+                setReviews(next)
+                await api("/api/admin/reviews", {
+                  method: "PATCH",
+                  headers: { "content-type": "application/json" },
+                  body: JSON.stringify({ ...review, stars }),
+                })
+              }}
+            >
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+            </select>
+          </label>
+          <textarea
+            className="field-ink min-h-28"
+            value={review.body}
+            onChange={(event) => {
+              const next = [...reviews]
+              next[index] = { ...review, body: event.target.value }
+              setReviews(next)
+            }}
+            onBlur={async () => {
+              if (!review.body.trim()) return
+              await api("/api/admin/reviews", {
+                method: "PATCH",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify(review),
+              })
+            }}
+          />
+          <input
+            className="field-ink"
+            value={review.source || ""}
+            placeholder="Source, optional"
+            onChange={(event) => {
+              const next = [...reviews]
+              next[index] = { ...review, source: event.target.value }
+              setReviews(next)
+            }}
+            onBlur={async () => {
+              await api("/api/admin/reviews", {
+                method: "PATCH",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify(review),
+              })
+            }}
+          />
+          <label className="flex items-center gap-2 font-extrabold">
+            <input
+              type="checkbox"
+              className="size-5 accent-hot"
+              checked={Boolean(review.featured)}
+              onChange={async (event) => {
+                const featured = event.target.checked ? 1 : 0
+                try {
+                  await api("/api/admin/reviews", {
+                    method: "PATCH",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify({ ...review, featured }),
+                  })
+                  const next = [...reviews]
+                  next[index] = { ...review, featured }
+                  setReviews(next)
+                } catch (err) {
+                  onNote(err instanceof Error ? err.message : "Could not update")
+                }
+              }}
+            />
+            Show on the site
+          </label>
+          <button
+            type="button"
+            className="admin-mini w-fit"
+            onClick={async () => {
+              await api(`/api/admin/reviews?id=${review.id}`, { method: "DELETE" })
+              load()
+            }}
+          >
+            Remove
+          </button>
+        </article>
       ))}
     </div>
   )

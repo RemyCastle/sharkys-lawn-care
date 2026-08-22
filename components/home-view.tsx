@@ -4,6 +4,7 @@ import Image from "next/image"
 
 import { useLive } from "@/components/live-public"
 import { ReviewLink } from "@/components/review-link"
+import { ReviewsView } from "@/components/reviews-view"
 import { WorkCompares } from "@/components/work-compares"
 import { WorkStack } from "@/components/work-stack"
 import { marks } from "@/lib/site"
@@ -59,6 +60,8 @@ export function HomeView() {
           <WorkStack />
         </div>
       </section>
+
+      <ReviewsView />
 
       <section className="bg-ground">
         <div className="mx-auto max-w-5xl px-4 py-12">

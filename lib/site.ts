@@ -23,7 +23,10 @@ export const site = {
   instagram: "https://www.instagram.com/sharkyslawnmowingservice/",
   instagramHandle: "@sharkyslawnmowingservice",
   googleReview: "https://g.page/r/CYJwY4dVqqhBEBE/review",
+  googleMaps:
+    "https://maps.google.com/maps/place/sharky's+lawn+care+llc/data=!4m2!3m1!1s0x20df45491a8efc19:0x41a8aa5587637082",
   ctaReview: "Review us",
+  ctaSeeReviews: "See reviews",
   heroTitle: "All jobs, big or small, shoot us a message, we do them all.",
   heroLead:
     "Mow, edge, trim, blow. Mulch, blackberries, thatch, cleanup, pressure wash. Eugene and Springfield area.",

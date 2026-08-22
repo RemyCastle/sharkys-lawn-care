@@ -66,3 +66,15 @@ CREATE TABLE IF NOT EXISTS pairs (
   sort_order INTEGER NOT NULL DEFAULT 0,
   created_at TEXT NOT NULL
 );
+
+-- Optional featured reviews. Never seed rows. Public only shows featured
+-- quotes they paste. Zero featured = buttons only, no fake quotes.
+CREATE TABLE IF NOT EXISTS reviews (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  stars INTEGER NOT NULL,
+  body TEXT NOT NULL,
+  source TEXT,
+  featured INTEGER NOT NULL DEFAULT 0,
+  created_at TEXT NOT NULL
+);

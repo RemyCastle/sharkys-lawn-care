@@ -3,7 +3,7 @@
 import Link from "next/link"
 
 import { BrandMark } from "@/components/brand-mark"
-import { ReviewLink } from "@/components/review-link"
+import { ReviewButtons } from "@/components/review-link"
 import { useLive } from "@/components/live-public"
 import { SocialButtons } from "@/components/social-icons"
 import { emailMailto, phoneTel } from "@/lib/public"
@@ -37,7 +37,7 @@ export function SiteFooter() {
           {locked.domain}
         </p>
         <SocialButtons />
-        <ReviewLink className="cta cta-mail w-fit" />
+        <ReviewButtons />
         <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
           <Link href="/" className="hover:text-hot">
             Home

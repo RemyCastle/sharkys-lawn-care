@@ -42,3 +42,4 @@ INSERT INTO photos (src, alt, caption, width, height, sort_order) SELECT '/work/
 INSERT INTO photos (src, alt, caption, width, height, sort_order) SELECT '/work/ig-03.jpg', 'Overgrown lawn with tall weeds against a grey fence and a sleeper wall', 'General Maintenance', 640, 640, 9 WHERE NOT EXISTS (SELECT 1 FROM photos WHERE src = '/work/ig-03.jpg');
 
 -- Do not insert pairs. Zero is the default. Never invent a before/after.
+-- Do not insert reviews. Zero featured is the default. Never invent a quote.

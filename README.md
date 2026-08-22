@@ -30,7 +30,7 @@ npx wrangler d1 execute sharkys-lawn-care --local --file=seed.sql
 npx wrangler pages dev ./out
 ```
 
-Open `/admin`. First visit: create owner. Then Site / Requests / Photos / Users.
+Open `/admin`. First visit: create owner. Then Site / Requests / Photos / Reviews / Users.
 
 Work stills stay a vertical stack. Before/After is optional: add a pair (two real photos + job type + Show on Work) on the Photos tab. Public Work only renders a pair that is on and complete. Zero pairs is the default. Do not invent a pair.
 
@@ -56,11 +56,12 @@ Do not create another Pages project. Do not invent DNS. Not Render.
 - Email [sharkyslawncare.541@gmail.com](mailto:sharkyslawncare.541@gmail.com)
 - Facebook: [Sharky's Lawn Care LLC](https://www.facebook.com/people/Sharkys-Lawn-Care-LLC/61590475589390/)
 - Instagram: [@sharkyslawnmowingservice](https://www.instagram.com/sharkyslawnmowingservice/)
-- Review us: [Jonathan’s official Google review link](https://g.page/r/CYJwY4dVqqhBEBE/review)
+- Review us: [Jonathan’s official Google write-review link](https://g.page/r/CYJwY4dVqqhBEBE/review)
+- See reviews: [Sharky's Lawn Care LLC on Google Maps](https://maps.google.com/maps/place/sharky's+lawn+care+llc/data=!4m2!3m1!1s0x20df45491a8efc19:0x41a8aa5587637082)
 - Owner: Jonathan Lopez
 - Area: Eugene and Springfield area
 
-Street is optional on quote requests only. No street on the public site. No hours. No star scores. No Maps search stand-in. No Sparky's.
+Street is optional on quote requests only. No street on the public site. No hours. No invented star badge. Featured quotes are optional in `/admin` — paste real ones only. Zero featured = Review us / See reviews buttons only. No Sparky's.
 
 ## Look
 
