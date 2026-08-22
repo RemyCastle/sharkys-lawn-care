@@ -3,6 +3,7 @@
 import Image from "next/image"
 
 import { useLive } from "@/components/live-public"
+import { ReviewLink } from "@/components/review-link"
 import { WorkCompares } from "@/components/work-compares"
 import { WorkStack } from "@/components/work-stack"
 import { marks } from "@/lib/site"
@@ -24,6 +25,7 @@ export function HomeView() {
               <a href="#quote" className="cta cta-mail">
                 {site.cta_secondary}
               </a>
+              <ReviewLink />
             </div>
           </div>
         </div>

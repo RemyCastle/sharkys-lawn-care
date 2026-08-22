@@ -1,5 +1,6 @@
 "use client"
 
+import { ReviewLink } from "@/components/review-link"
 import { useLive } from "@/components/live-public"
 import { WorkCompares } from "@/components/work-compares"
 import { WorkStack } from "@/components/work-stack"
@@ -13,9 +14,12 @@ export function WorkView() {
         <h1 className="text-6xl">Work</h1>
         <WorkCompares />
         <WorkStack />
-        <a href={phoneTel(site.phone_display)} className="cta cta-call mt-10">
-          {site.cta_primary}
-        </a>
+        <div className="mt-10 flex max-w-sm flex-col gap-3">
+          <a href={phoneTel(site.phone_display)} className="cta cta-call">
+            {site.cta_primary}
+          </a>
+          <ReviewLink />
+        </div>
       </div>
     </div>
   )
