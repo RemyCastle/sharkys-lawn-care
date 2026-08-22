@@ -15,8 +15,8 @@ export const site = {
   domain: "sharkyslawncare.com",
   siteUrl: "https://sharkyslawncare.com",
   seoTitle: "Sharky's Lawn Care LLC | Lawn Care in Springfield and Eugene, OR",
-  seoDescription:
-    "Mow, edge, trim, blow, mulch, blackberry removal, thatch and aerate, cleanup, pressure wash. Jonathan Lopez. Call (541) 579-0726.",
+    seoDescription:
+    "Mow, edge, trim, blow, mulch, blackberry removal, thatch and aerate, cleanup, pressure washing. Jonathan Lopez. Call (541) 579-0726.",
   telephoneE164: "+1-541-579-0726",
   facebook:
     "https://www.facebook.com/people/Sharkys-Lawn-Care-LLC/61590475589390/",
@@ -45,8 +45,8 @@ export const marks = {
 export const jobPhotos = [
   {
     src: "/work/pressure-wash-siding.jpg",
-    alt: "House siding mid pressure-wash: left still oxidized, right cleaned, mulch bed in front",
-    caption: "Pressure Wash",
+    alt: "House siding mid pressure washing: left still oxidized, right cleaned, mulch bed in front",
+    caption: "Pressure Washing",
     width: 720,
     height: 540,
     fill: true,
@@ -54,10 +54,58 @@ export const jobPhotos = [
   {
     src: "/work/ig-02.jpg",
     alt: "Six job photos: mowed yards, a worker blowing, a pool-side lawn, and a side yard",
-    caption: "General Maintenance (Edging, Blowing, Trimming, Mowing)",
+    caption: "Before and After",
     width: 361,
     height: 640,
     fill: false,
+  },
+  {
+    src: "/work/ig-panel-11.jpg",
+    alt: "Mowed backyard against a grey wood fence and a stone edge",
+    caption: "General Maintenance",
+    width: 164,
+    height: 164,
+    fill: true,
+  },
+  {
+    src: "/work/ig-panel-21.jpg",
+    alt: "Mowed two-level backyard with a low retaining wall and wood fence",
+    caption: "General Maintenance",
+    width: 164,
+    height: 165,
+    fill: true,
+  },
+  {
+    src: "/work/ig-panel-12.jpg",
+    alt: "Worker in a neon shirt blowing a mowed backyard",
+    caption: "General Maintenance",
+    width: 162,
+    height: 164,
+    fill: true,
+  },
+  {
+    src: "/work/ig-panel-22.jpg",
+    alt: "Worker in a neon shirt on a cut lawn by a hedge",
+    caption: "General Maintenance",
+    width: 162,
+    height: 165,
+    fill: true,
+  },
+  {
+    src: "/work/ig-panel-31.jpg",
+    alt: "Mowed lawn beside a pool, metal fence, and a small shed",
+    caption: "General Maintenance",
+    width: 164,
+    height: 161,
+    fill: true,
+  },
+  {
+    src: "/work/ig-panel-32.jpg",
+    alt: "Narrow mowed side yard between a white wall and hedges",
+    caption: "General Maintenance",
+    width: 162,
+    height: 161,
+    fill: true,
   },
 ] as const
 
@@ -83,7 +131,7 @@ export const services = [
     name: "Seasonal Clean-Ups and Debris Removal",
   },
   {
-    slug: "pressure-wash",
-    name: "Pressure Wash",
+    slug: "pressure-washing",
+    name: "Pressure Washing",
   },
 ] as const
