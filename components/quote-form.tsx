@@ -1,40 +1,18 @@
-"use client"
-
-import { FormEvent, useState } from "react"
-
 import { site } from "@/lib/site"
 
-export function QuoteForm({ jobPrefill = "" }: { jobPrefill?: string }) {
-  const [name, setName] = useState("")
-  const [phone, setPhone] = useState("")
-  const [town, setTown] = useState("")
-  const [street, setStreet] = useState("")
-  const [job, setJob] = useState(jobPrefill)
-
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const subject = encodeURIComponent(`Estimate — ${town || "yard"} — ${name || "new"}`)
-    const body = encodeURIComponent(
-      [
-        `Name: ${name}`,
-        `Phone: ${phone}`,
-        `Town: ${town}`,
-        street ? `Street: ${street}` : null,
-        `What you need: ${job}`,
-      ]
-        .filter(Boolean)
-        .join("\n")
-    )
-    const mailbox = document.createElement("a")
-    mailbox.href = `${site.emailMailto}?subject=${subject}&body=${body}`
-    mailbox.rel = "noreferrer"
-    document.body.appendChild(mailbox)
-    mailbox.click()
-    mailbox.remove()
-  }
-
+export function QuoteForm() {
   return (
-    <form onSubmit={onSubmit} className="flex max-w-xl flex-col gap-4">
+    <form
+      action={site.formSubmit}
+      method="POST"
+      encType="multipart/form-data"
+      className="flex max-w-xl flex-col gap-4"
+    >
+      <input type="hidden" name="_subject" value="Sharky's Lawn Care — job" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
+
       <label className="flex flex-col gap-1 text-sm font-extrabold uppercase tracking-wide">
         Name
         <input
@@ -42,8 +20,6 @@ export function QuoteForm({ jobPrefill = "" }: { jobPrefill?: string }) {
           name="name"
           autoComplete="name"
           required
-          value={name}
-          onChange={(event) => setName(event.target.value)}
           className="field-ink"
         />
       </label>
@@ -55,8 +31,6 @@ export function QuoteForm({ jobPrefill = "" }: { jobPrefill?: string }) {
           type="tel"
           autoComplete="tel"
           required
-          value={phone}
-          onChange={(event) => setPhone(event.target.value)}
           className="field-ink"
         />
       </label>
@@ -67,22 +41,12 @@ export function QuoteForm({ jobPrefill = "" }: { jobPrefill?: string }) {
           name="town"
           autoComplete="address-level2"
           required
-          value={town}
-          onChange={(event) => setTown(event.target.value)}
           className="field-ink"
         />
       </label>
       <label className="flex flex-col gap-1 text-sm font-extrabold uppercase tracking-wide">
         What you need
-        <textarea
-          id="quote-job"
-          name="job"
-          required
-          rows={4}
-          value={job}
-          onChange={(event) => setJob(event.target.value)}
-          className="field-ink"
-        />
+        <textarea id="quote-job" name="What you need" required rows={4} className="field-ink" />
       </label>
       <label className="flex flex-col gap-1 text-sm font-extrabold uppercase tracking-wide">
         Optional street
@@ -90,9 +54,18 @@ export function QuoteForm({ jobPrefill = "" }: { jobPrefill?: string }) {
           id="quote-street"
           name="street"
           autoComplete="street-address"
-          value={street}
-          onChange={(event) => setStreet(event.target.value)}
           className="field-ink"
+        />
+      </label>
+      <label className="flex flex-col gap-1 text-sm font-extrabold uppercase tracking-wide">
+        {site.quotePhotos}
+        <input
+          id="quote-photos"
+          name="attachment"
+          type="file"
+          accept="image/*"
+          multiple
+          className="field-ink py-2"
         />
       </label>
       <button type="submit" className="cta cta-mail w-fit">

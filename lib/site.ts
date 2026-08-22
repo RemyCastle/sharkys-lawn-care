@@ -11,6 +11,7 @@ export const site = {
   phoneTel: "tel:+15415790726",
   email: "sharkyslawncare.541@gmail.com",
   emailMailto: "mailto:sharkyslawncare.541@gmail.com",
+  formSubmit: "https://formsubmit.co/sharkyslawncare.541@gmail.com",
   domain: "sharkyslawncare.com",
   siteUrl: "https://sharkyslawncare.com",
   facebook:
@@ -26,6 +27,7 @@ export const site = {
     "Jonathan Lopez owns it. Insured and bonded. More than ten years on lawns. Estimates are free.",
   quoteHeading: "Email the job",
   quoteSubmit: "Send",
+  quotePhotos: "Photos of the yard, optional",
   quoteHelper: "Or call (541) 579-0726.",
 } as const
 

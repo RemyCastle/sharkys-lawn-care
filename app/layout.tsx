@@ -49,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${barlow.variable} ${teko.variable} h-full`}>
-      <body className="flex min-h-full flex-col bg-ground pb-24">
+      <body className="flex min-h-full flex-col bg-ground pb-32">
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <QuoteBlock />
