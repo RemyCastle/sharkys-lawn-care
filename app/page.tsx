@@ -8,12 +8,12 @@ export default function HomePage() {
     <div className="bg-ground">
       <section className="border-b-4 border-ink bg-ground">
         <div className="mx-auto max-w-5xl px-4 py-8">
-          <div className="vinyl mx-auto w-full max-w-xl overflow-hidden">
+          <div className="vinyl mx-auto w-full max-w-md overflow-hidden">
             <Image
-              src={marks.coverPolo}
-              alt="Sharky's Lawn Care printed card: polo shark, walk-behind mower, and the service list"
-              width={960}
-              height={400}
+              src={marks.card}
+              alt="Sharky's Lawn Care printed card: hoodie shark on a walk-behind mower, Jonathan Lopez, Eugene/Springfield"
+              width={1200}
+              height={1600}
               className="h-auto w-full object-contain"
               unoptimized
               priority
@@ -39,6 +39,16 @@ export default function HomePage() {
       <section className="border-b-4 border-ink bg-ground">
         <div className="mx-auto max-w-5xl px-4 py-12">
           <h2 className="text-5xl">Services</h2>
+          <div className="vinyl mt-8 max-w-xl overflow-hidden">
+            <Image
+              src={marks.coverPolo}
+              alt="Sharky's Lawn Care polo-shark service list"
+              width={960}
+              height={400}
+              className="h-auto w-full object-contain"
+              unoptimized
+            />
+          </div>
           <ul className="mt-8 max-w-xl list-disc space-y-2 pl-5 text-xl font-medium">
             {services.map((service) => (
               <li key={service.slug}>{service.name}</li>
